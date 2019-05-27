@@ -6,13 +6,13 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/24 16:00:51 by vmulder        #+#    #+#                */
-/*   Updated: 2019/05/27 14:54:55 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/05/27 16:19:12 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/filler.h"
 
-ft_getpiece(t_struct *vl)
+void	ft_getpiece(t_fillstr *vl)
 {
 	char	*temp;
 
@@ -23,7 +23,7 @@ ft_getpiece(t_struct *vl)
 	}
 }
 
-void	ft_getfield(t_struct *vl)
+void	ft_getfield(t_fillstr *vl)
 {
 	char	*temp;
 	int		i;
@@ -49,10 +49,9 @@ void	ft_getfield(t_struct *vl)
 	}
 }
 
-void	ft_player(t_struct *vl)
+void	ft_player(t_fillstr *vl)
 {
 	char		*playerstring;
-	int			linenbr;
 
 	get_next_line(0, &playerstring);
 	if (playerstring[10] == '1')
@@ -63,7 +62,7 @@ void	ft_player(t_struct *vl)
 
 void	ft_start_cond(void)
 {
-	t_struct vl;
+	t_fillstr vl;
 
 	ft_player(&vl);
 	ft_getfield(&vl);

@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/24 16:22:45 by vmulder        #+#    #+#                */
-/*   Updated: 2019/05/27 14:56:57 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/05/27 16:17:28 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "../libft/incl/libft.h"
 
-typedef struct		s_struct
+typedef struct		s_fillstr
 {
 	int				fieldwidth;
 	int				fieldlength;
@@ -23,7 +23,7 @@ typedef struct		s_struct
 	char			*field;
 	char			*token;
 	
-}					t_struct;
+}					t_fillstr;
 
 int			main(void);
 

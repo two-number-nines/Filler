@@ -1,41 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_strjoin.c                                       :+:    :+:            */
+/*   test.c                                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/01/19 20:13:50 by vmulder        #+#    #+#                */
-/*   Updated: 2019/05/28 13:34:11 by vmulder       ########   odam.nl         */
+/*   Created: 2019/05/27 14:36:15 by vmulder        #+#    #+#                */
+/*   Updated: 2019/05/27 14:56:42 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdio.h>
 
-char	*ft_strjoin(char const *s1, char const *s2)
+int		main(void)
 {
-	char	*nstring;
-	int		i;
-	int		b;
-
-	i = 0;
-	b = 0;
-	if (!s1 || !s2)
-		return (0);
-	nstring = (char *)malloc(sizeof(char) * ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (nstring == NULL)
-		return (0);
-	while (s1[i])
+	char *temp = "12 121";
+	int i = 0;
+	int boardlines = 0;
+	int board = 0;
+	while(temp[i] >= '0' && temp[i] <= '9')
 	{
-		nstring[i] = s1[i];
+		boardlines = boardlines * 10 + temp[i] - '0';
 		i++;
 	}
-	while (s2[b])
+	i++;
+	while(temp[i] >= '0' && temp[i] <= '9')
 	{
-		nstring[i] = s2[b];
+		board = board * 10 + temp[i] - '0';
 		i++;
-		b++;
 	}
-	nstring[i] = '\0';
-	return (nstring);
+	printf("%d", board);
 }

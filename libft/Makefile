@@ -6,7 +6,7 @@
 #    By: vmulder <vmulder@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/04/22 14:18:40 by vmulder        #+#    #+#                 #
-#    Updated: 2019/05/24 17:58:55 by vmulder       ########   odam.nl          #
+#    Updated: 2019/05/28 12:54:23 by vmulder       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ OBJS = $(SOURCES:.c=.o)
 
 ## COMPILATION ##
 CC = gcc
-FLAGS = -Wall -Werror -Wextra -c
+FLAGS = -Wall -Werror -Wextra -c -g
 
 ## RULES ##
 all: $(NAME)

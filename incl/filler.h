@@ -6,14 +6,14 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/24 16:22:45 by vmulder        #+#    #+#                */
-/*   Updated: 2019/05/28 16:53:45 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/05/29 14:30:12 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLER_H
 # define FILLER_H
 
-#include "../libft/incl/libft.h"
+# include "../libft/incl/libft.h"
 
 /*
 ** field is a string with the data of the whole field
@@ -24,24 +24,30 @@ typedef struct		s_fillstr
 {
 	char			player;
 
-	/*
-	**	variables used for the field, w = width l = length
-	*/
-
 	int				fieldw;
 	int				fieldl;
 	char			*field;
 
-	/*
-	** variables used for the token, w = width l = length
-	*/
-
 	int				tokenw;
 	int				tokenl;
 	char			*token;
-	
+
 }					t_fillstr;
 
-int			main(void);
+int					main(void);
+
+/*
+** get_data.c
+*/
+
+void				ft_getpiece(t_fillstr *vl);
+void				ft_getfield(t_fillstr *vl);
+void				ft_getplayer(t_fillstr *vl);
+
+/*
+** while_loops.c
+*/
+
+int					ft_whileloop_get(char *condition, int *stval, int i);
 
 #endif

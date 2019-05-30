@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/29 14:21:58 by vmulder        #+#    #+#                */
-/*   Updated: 2019/05/29 15:57:40 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/05/30 16:57:31 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ void	ft_getpiece(t_fillstr *vl)
 	i = ft_whileloop_get(tempvalue, &vl->tokenl, i);
 	i++;
 	i = ft_whileloop_get(tempvalue, &vl->tokenw, i);
-	vl->token = (char *)malloc(sizeof(char) * (vl->tokenw + 1) * vl->tokenl);
-	ft_bzero(vl->token, (vl->tokenw + 1) * vl->tokenl);
+	vl->otoken = (char *)malloc(sizeof(char) * (vl->tokenw + 1) * vl->tokenl);
+	ft_bzero(vl->otoken, (vl->tokenw + 1) * vl->tokenl);
 	i = vl->tokenl;
-	ft_wlp_get_sd(&temptoken, &vl->token, i, 0);
-	ft_printf("\nthe token: %s", vl->token);
+	ft_wlp_get_sd(&temptoken, &vl->otoken, i, 0);
+	ft_printf("\nthe token: %s", vl->otoken);
 	free(tempvalue);
 	free(temptoken);
-	//ft_cutpiece(vl);
+	ft_cutpiece(vl);
 }
 
 void	ft_getfield(t_fillstr *vl)
@@ -46,13 +46,14 @@ void	ft_getfield(t_fillstr *vl)
 	i = ft_whileloop_get(tempvalue, &vl->fieldl, i);
 	i++;
 	i = ft_whileloop_get(tempvalue, &vl->fieldw, i);
-	vl->field = (char *)malloc(sizeof(char) * (vl->fieldw + 5) * vl->fieldl);
-	ft_bzero(vl->field, (vl->fieldw + 5) * vl->fieldl);
+	vl->ofield = (char *)malloc(sizeof(char) * (vl->fieldw + 5) * vl->fieldl);
+	ft_bzero(vl->ofield, (vl->fieldw + 5) * vl->fieldl);
 	i = 1 + vl->fieldl;
-	ft_wlp_get_sd(&tempfield, &vl->field, i, 1);
-	ft_printf("the field: %s", vl->field);
+	ft_wlp_get_sd(&tempfield, &vl->ofield, i, 1);
+	ft_printf("the field: %s", vl->ofield);
 	free(tempvalue);
 	free(tempfield);
+	vl->field = ft_strnsplit(vl->ofield, vl->fieldw + 4);
 }
 
 void	ft_getplayer(t_fillstr *vl)

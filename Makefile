@@ -6,7 +6,7 @@
 #    By: vmulder <vmulder@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/04/22 14:18:40 by vmulder        #+#    #+#                 #
-#    Updated: 2019/05/29 14:30:48 by vmulder       ########   odam.nl          #
+#    Updated: 2019/05/30 19:40:19 by vmulder       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ HEADER = incl
 SRC_PATH  = srcs
 
 ### SOURCES ###
-SOURCES = main.c get_data.c while_loops.c
+SOURCES = main.c get_data.c while_loops.c manipulate_data.c
 
 ### OBJECTS ###
 

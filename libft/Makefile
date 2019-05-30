@@ -6,7 +6,7 @@
 #    By: vmulder <vmulder@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/04/22 14:18:40 by vmulder        #+#    #+#                 #
-#    Updated: 2019/05/28 12:54:23 by vmulder       ########   odam.nl          #
+#    Updated: 2019/05/30 14:58:51 by vmulder       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ SOURCES = ft_printf.c checkflags.c checkwidth.c checkpresicion.c checklengmodif.
 			ft_skipwhite.c ft_strrev.c ft_islower.c ft_isupper.c \
 			ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstiter.c \
 			ft_lstmap.c ft_atoi_base.c ft_itoa_base_u.c ft_itoa_base.c \
-			ft_getdigits_u.c get_next_line.c
+			ft_getdigits_u.c get_next_line.c ft_strnsplit.c
 
 ## OBJECTS ##
 SRCS = $(addprefix $(SRC_PATH)/,$(SOURCES))

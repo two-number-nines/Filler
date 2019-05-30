@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/24 16:22:45 by vmulder        #+#    #+#                */
-/*   Updated: 2019/05/29 14:30:12 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/05/29 14:50:44 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void				ft_getplayer(t_fillstr *vl);
 ** while_loops.c
 */
 
-int					ft_whileloop_get(char *condition, int *stval, int i);
+int					ft_whileloop_get(char *condit, int *stval, int i);
+void				ft_wlp_get_sd(char **condit, char **stval, int i, int fd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/29 14:21:58 by vmulder        #+#    #+#                */
-/*   Updated: 2019/05/29 14:27:20 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/05/29 15:57:40 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,11 @@ void	ft_getpiece(t_fillstr *vl)
 	vl->token = (char *)malloc(sizeof(char) * (vl->tokenw + 1) * vl->tokenl);
 	ft_bzero(vl->token, (vl->tokenw + 1) * vl->tokenl);
 	i = vl->tokenl;
-	while (i)
-	{
-		get_next_line(globalfd, &temptoken);
-		vl->token = ft_strcat(vl->token, temptoken);
-		i--;
-	}
+	ft_wlp_get_sd(&temptoken, &vl->token, i, 0);
+	ft_printf("\nthe token: %s", vl->token);
 	free(tempvalue);
 	free(temptoken);
+	//ft_cutpiece(vl);
 }
 
 void	ft_getfield(t_fillstr *vl)
@@ -52,13 +49,8 @@ void	ft_getfield(t_fillstr *vl)
 	vl->field = (char *)malloc(sizeof(char) * (vl->fieldw + 5) * vl->fieldl);
 	ft_bzero(vl->field, (vl->fieldw + 5) * vl->fieldl);
 	i = 1 + vl->fieldl;
-	while (i)
-	{
-		get_next_line(globalfd, &tempfield);
-		if (tempfield[0] >= '0' && tempfield[0] <= '9')
-			vl->field = ft_strcat(vl->field, tempfield);
-		i--;
-	}
+	ft_wlp_get_sd(&tempfield, &vl->field, i, 1);
+	ft_printf("the field: %s", vl->field);
 	free(tempvalue);
 	free(tempfield);
 }

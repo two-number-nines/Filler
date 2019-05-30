@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/12 18:22:41 by vmulder        #+#    #+#                */
-/*   Updated: 2019/05/24 16:58:12 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/05/30 15:00:16 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ char				*ft_strnstr(const char *hay, const char *nee, size_t len);
 char				*ft_itoa(long long n);
 int					ft_getdigits(long long c);
 char				**ft_strsplit(char const *s, char c);
+char				**ft_strnsplit(char *s, int len);
 void				ft_strdel(char **as);
 char				*ft_strnew(size_t size);
 void				ft_memdel(void **ap);

@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/24 16:22:45 by vmulder        #+#    #+#                */
-/*   Updated: 2019/05/30 19:39:51 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/05/31 14:38:27 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct		s_fillstr
 int					main(void);
 
 /*
-** get_data.c
+** get_data
 */
 
 void				ft_getpiece(t_fillstr *vl);
@@ -48,16 +48,17 @@ void				ft_getfield(t_fillstr *vl);
 void				ft_getplayer(t_fillstr *vl);
 
 /*
-** while_loops.c
+** while_loops
 */
 
 int					ft_whileloop_get(char *condit, int *stval, int i);
 void				ft_wlp_get_sd(char **condit, char **stval, int i, int fd);
 
 /*
-** manipulate_data.c
+** check and replace 1 and 2
 */
 
 void				ft_cutpiece(t_fillstr *vl);
+void				save_token(t_fillstr *vl, char **tempstr);
 
 #endif

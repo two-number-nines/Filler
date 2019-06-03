@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/24 16:00:51 by vmulder        #+#    #+#                */
-/*   Updated: 2019/05/29 15:56:02 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/03 14:02:03 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 // check if ft_strsplit deletes the char c
 // probable make the vl->field a 2d array and also make token a 2d array and finish the ft_cutpiece.
 //replace filedescriptor 1 with 0
+// waar de eerste ster linksboven bevind moet je de x y meegeven
+// mag er maar 1 overlappen
+// -> going to work on a check if i can place the token in a certain spot, after that make a algorithm
 
 void	ft_init(t_fillstr *vl)
 {
 	ft_bzero(vl, sizeof(t_fillstr));
+	vl->offseth = -1;
 }
 
 void	ft_start_cond(void)
@@ -27,8 +31,10 @@ void	ft_start_cond(void)
 
 	ft_init(&vl);
 	ft_getplayer(&vl);
+	// the following maybe in a while loop
 	ft_getfield(&vl);
 	ft_getpiece(&vl);
+	//ft_placepiece(&vl);
 }
 
 int		main(void)

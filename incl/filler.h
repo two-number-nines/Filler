@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/24 16:22:45 by vmulder        #+#    #+#                */
-/*   Updated: 2019/05/31 14:38:27 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/03 14:03:40 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 typedef struct		s_fillstr
 {
 	char			player;
+	char			comp;
 
 	int				fieldw;
 	int				fieldl;
@@ -32,6 +33,8 @@ typedef struct		s_fillstr
 
 	int				tokenw;
 	int				tokenl;
+	int				offseth;
+	int				offsetv;
 	char			*otoken;
 	char			**token;
 
@@ -60,5 +63,12 @@ void				ft_wlp_get_sd(char **condit, char **stval, int i, int fd);
 
 void				ft_cutpiece(t_fillstr *vl);
 void				save_token(t_fillstr *vl, char **tempstr);
+void				ft_check_offset(t_fillstr *vl, char **tempstr);
+
+/*
+**	find_xy
+*/
+
+void				ft_findcoor(t_fillstr *vl);
 
 #endif

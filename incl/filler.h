@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/24 16:22:45 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/03 16:43:42 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/03 18:26:44 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct		s_fillstr
 
 	int				o[2];
 	int				x[2];
+	int				midfield[2];
 	
 	int				fieldw;
 	int				fieldl;
@@ -72,6 +73,6 @@ void				ft_check_offset(t_fillstr *vl, char **tempstr);
 **	find_xy
 */
 
-void				ft_findcoor_xo(t_fillstr *vl);
+void				ft_findcoor(t_fillstr *vl);
 
 #endif

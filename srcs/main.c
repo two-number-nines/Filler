@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/24 16:00:51 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/03 14:02:03 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/03 16:43:57 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	ft_start_cond(void)
 	ft_getplayer(&vl);
 	// the following maybe in a while loop
 	ft_getfield(&vl);
+	ft_findcoor_xo(&vl);
 	ft_getpiece(&vl);
 	//ft_placepiece(&vl);
 }

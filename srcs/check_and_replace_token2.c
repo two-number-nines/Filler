@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/31 13:54:56 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/03 14:46:16 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/03 16:38:18 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	save_token(t_fillstr *vl, char **tempstr)
 	int d;
 	int a;
 
-	i = vl->offseth -1;
+	i = vl->offsetv;
 	d = 0;
 	a = 0;
 	vl->token = (char **)malloc(sizeof(char *) * vl->tokenl + 1);
@@ -82,7 +82,7 @@ void	save_token(t_fillstr *vl, char **tempstr)
 		a++;
 	}
 	free(tempstr);
-	i = vl->offseth -1;
+	i = vl->offsetv;
 	a = 0;
 	ft_printf("\n--------------\n");
 	ft_printf("the cut token:\n");

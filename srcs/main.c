@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/24 16:00:51 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/04 14:29:40 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/06 19:35:50 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,23 @@ void	ft_start_cond(void)
 {
 	t_fillstr 	vl;
 	int			i;
+	int			place;
 
 	i = 0;
+	place = 1;
 	ft_init(&vl);
 	ft_getplayer(&vl);
-	// the following maybe in a while loop
-	ft_getfield(&vl);
-	if (!i)
+	while (place)
 	{
-		ft_findcoor(&vl);
-		i = 1;
+		ft_getfield(&vl);
+		if (!i)
+		{
+			ft_findcoor(&vl);
+			i = 1;
+		}
+		ft_getpiece(&vl);
+		place = ft_placepiece(&vl);
 	}
-	ft_getpiece(&vl);
-	ft_placepiece(&vl);
 }
 
 int		main(void)

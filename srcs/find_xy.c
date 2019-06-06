@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/31 16:02:33 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/03 18:44:08 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/06 14:21:54 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void		ft_findmidfield(t_fillstr *vl)
 {
-	vl->midfield[0] = vl->fieldw / 2;
-	vl->midfield[1] = vl->fieldl / 2;
+	vl->midfield[1] = vl->fieldw / 2 + 4;
+	vl->midfield[0] = vl->fieldl / 2;
 
-	ft_printf("midfield: x=%d y=%d\n", vl->midfield[0], vl->midfield[1]);
+	ft_printf("midfield: y=%d x=%d\n", vl->midfield[0], vl->midfield[1]);
 }
 
 void		ft_findcoor_xo(t_fillstr *vl)

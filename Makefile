@@ -6,7 +6,7 @@
 #    By: vmulder <vmulder@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/04/22 14:18:40 by vmulder        #+#    #+#                 #
-#    Updated: 2019/06/04 14:03:35 by vmulder       ########   odam.nl          #
+#    Updated: 2019/06/06 19:31:20 by vmulder       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SRC_PATH  = srcs
 
 ### SOURCES ###
 SOURCES = main.c get_data.c while_loops.c check_and_replace_token.c \
-			check_and_replace_token2.c find_xy.c return_xy.c
+			check_and_replace_token2.c find_xy.c return_xy.c return_xy_en.c \
+			write_coor.c
 
 ### OBJECTS ###
 

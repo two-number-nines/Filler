@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/31 13:54:56 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/06 11:13:24 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/06 19:25:42 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,19 @@ void	ft_check_offset(t_fillstr *vl, char **tempstr)
 	int i;
 	int d;
 	int a;
+	int e;
 
 	i = 0;
 	d = 0;
 	a = -1;
+	e = 0;
 	while (tempstr[i])
 	{
 		while (tempstr[i][d])
 		{
 			if (tempstr[i][d] == '*')
 			{
+				e = 1;
 				a = 1;
 				if (vl->offseth > d || vl->offseth == -1)
 					vl->offseth = d;
@@ -36,7 +39,9 @@ void	ft_check_offset(t_fillstr *vl, char **tempstr)
 		}
 		if (a == -1)
 			vl->offsetv++;
-		a = -1;
+		if (!e)
+			vl->offsetva++;
+			a = -1;
 		d = 0;
 		i++;
 	}
@@ -86,11 +91,10 @@ void	save_token(t_fillstr *vl, char **tempstr)
 		i++;
 	}
 	free(tempstr);
-	i = a;
 	a = 0;
 	ft_printf("\n--------------\n");
 	ft_printf("the cut token:\n");
-	while (a < i)
+	while (a < 3)
 	{
 		ft_printf("%s\n", vl->token[a]);
 		a++;

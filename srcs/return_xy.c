@@ -6,26 +6,24 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/06/03 18:54:40 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/06 12:10:16 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/06 19:37:14 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/filler.h"
-// door het hele field gaan en alle plekken waarbij de token en field 1 ster overlappen 
-// de afstand van midfield onthouden en als we door het hele veld zijn gegaan returnen we 
-// de x and y met de waarde het dichts bij nul (verste x en y - midfield) zo gaan we asap
-// daarna shiss maken voor als midfield bereikt is.
+// i worked on the return value, return value is now not yet prototyped correctly
+// then its ok and start testing for player is o.
 
-int		calc_coor(t_fillstr *vl, int lastx, int lasty)
+int		calc_coor_to_midfield(t_fillstr *vl, int lastx, int lasty)
 {
-	if (lastx - vl->midfield[0] < vl->coorsave[0] && lasty - vl->midfield[1] < vl->coorsave[1])
+	if ((lastx + lasty) - (vl->midfield[1] + vl->midfield[0]) <= (vl->coorsave[1] + vl->coorsave[0]))
 	{
 		return (1);
 	}
 	return (0);
 }
 
-void	calc_and_save_coor(t_fillstr *vl, int i, int d)
+void	calc_and_save_coor_mf(t_fillstr *vl, int i, int d)
 {
 	int ti;
 	int td;
@@ -50,14 +48,13 @@ void	calc_and_save_coor(t_fillstr *vl, int i, int d)
 		ti++;
 	}
 	ft_printf("the field coor if the last * would be there: %d, %d\n", lastxy[0], lastxy[1]);
-	if (calc_coor(vl, lastxy[0], lastxy[1]))
+	if (calc_coor_to_midfield(vl, lastxy[0], lastxy[1]))
 	{
 		vl->coorsave[0] = d;
 		vl->coorsave[1] = i;
-		ft_printf("calc_coor was true ---- ");
-		ft_printf("it will go y: %d, and x: %d\n", i, d);
+	//	ft_printf("calc_coor was true ---- ");
+	ft_printf("it will go y: %d, and x: %d\n", i, d);
 	}
-	//ft_printf("this is the coor closest to mid: x: %d y: %d\n", vl->coorsave[0], vl->coorsave[1]);
 }
 
 int		ft_fitpiece_o(t_fillstr *vl, int i, int d)
@@ -101,14 +98,21 @@ void	ft_findplace_o(t_fillstr *vl)
 	mp = 0;
 	if (vl->field[vl->midfield[0]][vl->midfield[1]] == '.')
 		mp = 1;
+	ft_printf("\n%d\n", mp);
 	while (i < vl->fieldl)
 	{
 		while (d < vl->fieldw)
 		{
 			if (ft_fitpiece_o(vl, i, d) && mp)
 			{
-				calc_and_save_coor(vl, i, d);
+				calc_and_save_coor_mf(vl, i, d);
 			}
+			else if (ft_fitpiece_o(vl, i, d) && !mp)
+			{
+				calc_and_save_coor_enemy(vl, i, d);
+			}
+			else
+				return (0);
 			d++;
 		}
 		d = 4;
@@ -118,7 +122,11 @@ void	ft_findplace_o(t_fillstr *vl)
 
 void	ft_placepiece(t_fillstr *vl)
 {
+	int place;
+
 	vl->tokenl -= vl->offsetv;
 	vl->tokenw -= vl->offseth;
-	ft_findplace_o(vl);
+	vl->fieldw += 4;
+	place = ft_findplace_o(vl);
+	ft_write(*vl);
 }

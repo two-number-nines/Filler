@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/24 16:22:45 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/04 14:03:14 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/06 19:27:08 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 ** field is a string with the data of the whole field
 ** otoken is when it is just 1d string but im changing it to a 2d token
 ** token is the piece im going to put in
-** offset is how many empty rows exist in the tokenfield
+** offset is how many empty rows exist in the tokenfield va is above the first *
 ** coorsave is where i save my coor where the midfield is most close
 */
 
@@ -45,6 +45,7 @@ typedef struct		s_fillstr
 	int				tokenl;
 	int				offseth;
 	int				offsetv;
+	int				offsetva;
 	char			*otoken;
 	char			**token;
 
@@ -88,5 +89,12 @@ void				ft_findcoor(t_fillstr *vl);
 */
 
 void				ft_placepiece(t_fillstr *vl);
+void				calc_and_save_coor_enemy(t_fillstr *vl, int i, int d);
+
+/*
+** write_coor
+*/
+
+void				ft_write(t_fillstr vl);
 
 #endif

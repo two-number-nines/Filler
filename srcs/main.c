@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/24 16:00:51 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/03 18:59:45 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/04 14:29:40 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,12 @@ void	ft_start_cond(void)
 	// the following maybe in a while loop
 	ft_getfield(&vl);
 	if (!i)
+	{
 		ft_findcoor(&vl);
+		i = 1;
+	}
 	ft_getpiece(&vl);
-//	ft_placepiece(&vl);
+	ft_placepiece(&vl);
 }
 
 int		main(void)

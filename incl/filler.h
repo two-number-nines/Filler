@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/24 16:22:45 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/03 18:26:44 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/04 14:03:14 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,15 @@
 # include "../libft/incl/libft.h"
 
 /*
+** player and comp are the char that match the player and comp
+** o and x are int arrays where the starting x and y is saved
+** midfield is the middle of the map
+** ofield is when it is just 1d string but im changing it to a 2d field
 ** field is a string with the data of the whole field
+** otoken is when it is just 1d string but im changing it to a 2d token
 ** token is the piece im going to put in
-** o field is when it is just 1d string but im changing it to a 2d field
+** offset is how many empty rows exist in the tokenfield
+** coorsave is where i save my coor where the midfield is most close
 */
 
 typedef struct		s_fillstr
@@ -41,6 +47,8 @@ typedef struct		s_fillstr
 	int				offsetv;
 	char			*otoken;
 	char			**token;
+
+	int				coorsave[2];
 
 }					t_fillstr;
 
@@ -74,5 +82,11 @@ void				ft_check_offset(t_fillstr *vl, char **tempstr);
 */
 
 void				ft_findcoor(t_fillstr *vl);
+
+/*
+**	return_xy
+*/
+
+void				ft_placepiece(t_fillstr *vl);
 
 #endif

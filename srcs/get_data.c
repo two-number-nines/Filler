@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/29 14:21:58 by vmulder        #+#    #+#                */
-/*   Updated: 2019/05/31 15:37:15 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/04 14:32:33 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	ft_getpiece(t_fillstr *vl)
 	ft_bzero(vl->otoken, (vl->tokenw + 1) * vl->tokenl);
 	i = vl->tokenl;
 	ft_wlp_get_sd(&temptoken, &vl->otoken, i, 0);
+	ft_printf("\ntokenlength: %d", vl->tokenl);
+	ft_printf("\ntokenwidth: %d", vl->tokenw);
 	ft_printf("\nthe token: %s", vl->otoken);
 	free(tempvalue);
 	free(temptoken);
@@ -72,4 +74,5 @@ void	ft_getplayer(t_fillstr *vl)
 		vl->player = 'X';
 		vl->comp = 'O';
 	}
+	ft_printf("the player: %c\nthe comp: %c\n", vl->player, vl->comp);
 }

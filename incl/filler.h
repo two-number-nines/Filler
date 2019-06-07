@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/24 16:22:45 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/07 12:21:17 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/07 22:28:04 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ typedef struct		s_fillstr
 
 	int				tokenw;
 	int				tokenl;
-	int				offseth;
-	int				offsetv;
-	int				offsetva;
+	int				offsetw;
+	int				offsetl;
 	char			*otoken;
 	char			**token;
+	char			**ntoken;
 
 	int				coorsave[2];
 
@@ -75,9 +75,10 @@ void				ft_wlp_get_sd(char **condit, char **stval, int i, int fd);
 ** check and replace 1 and 2
 */
 
+void				ft_check_offset_l(t_fillstr *vl);
+void				ft_check_offset_w(t_fillstr *vl);
 void				ft_cutpiece(t_fillstr *vl);
-void				save_token(t_fillstr *vl, char **tempstr);
-void				ft_check_offset(t_fillstr *vl, char **tempstr);
+void				new_token(t_fillstr *vl);
 
 /*
 **	find_xy

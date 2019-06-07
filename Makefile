@@ -6,7 +6,7 @@
 #    By: vmulder <vmulder@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/04/22 14:18:40 by vmulder        #+#    #+#                 #
-#    Updated: 2019/06/07 19:15:08 by vmulder       ########   odam.nl          #
+#    Updated: 2019/06/07 22:27:37 by vmulder       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,9 +24,9 @@ HEADER = incl
 SRC_PATH  = srcs
 
 ### SOURCES ###
-SOURCES = main.c get_data.c get_field.c check_and_replace_token.c \
-			check_and_replace_token2.c find_xy.c return_xy.c return_xy_en.c \
-			write_coor.c get_piece.c
+SOURCES = main.c get_player.c get_field.c cut_piece.c \
+			find_xy.c return_xy.c cut_piece2.c \
+			write_coor.c get_piece.c check_offset.c
 
 ### OBJECTS ###
 

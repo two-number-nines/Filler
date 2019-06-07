@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/06/07 19:06:09 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/07 19:21:56 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/07 22:31:53 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void		ft_get_str(t_fillstr *vl)
 		free(tempvalue);
 		i--;
 	}
-	ft_printf("fieldstr: %s\n", vl->otoken);
+	ft_printf("tokenstr: %s\n", vl->otoken);
 	ft_printf("strlen: %d\n", ft_strlen(vl->otoken));
 }
 
@@ -74,5 +74,7 @@ void			ft_getpiece(t_fillstr *vl)
 	ft_get_len_wid(vl);
 	ft_get_str(vl);
 	ft_split(vl);
-//	ft_cutpiece(vl);
+	ft_check_offset_l(vl);
+	ft_check_offset_w(vl);
+	//ft_cutpiece(vl);
 }

@@ -6,14 +6,14 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/06/03 18:54:40 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/07 12:16:08 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/07 23:39:13 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/filler.h"
 // i worked on the return value, return value is now not yet prototyped correctly
 // then its ok and start testing for player is o.
-
+/*
 int		calc_coor_to_midfield(t_fillstr *vl, int lastx, int lasty)
 {
 	int i;
@@ -60,33 +60,41 @@ void	calc_and_save_coor_mf(t_fillstr *vl, int i, int d)
 //	ft_printf("it will go y: %d, and x: %d\n", i, d);
 	}
 }
-
+*/
 int		ft_fitpiece_o(t_fillstr *vl, int i, int d)
 {
 	int ti;
 	int td;
-	int counter;
+	int count;
+	int temp;
 
-	ti = 0;
-	td = 0;
-	counter = 0;
+	temp = d;
+	ti = vl->offsetl;
+	td = vl->offsetw;
+	count = 0;
 	while (ti < vl->tokenl)
 	{
 		while (td < vl->tokenw)
 		{
-			if (vl->token[ti][td] == '*' && (i + ti) < vl->fieldl && (d + td) < vl->fieldw)
-			{
-				if (vl->field[i + ti][d + td] == 'O')
-					counter++;
-				else if (vl->field[i + ti][d + td] == 'X')
+			if (d >= vl->fieldw || i >= vl->fieldl)
+				if (vl->token[ti][td] == '*')
 					return (0);
+			if (vl->token[ti][td] == '*' && d < vl->fieldw && i < vl->fieldl)
+			{
+				if (vl->field[i][d] == 'X')
+					return (0);
+				else if (vl->field[i][d] == 'O')
+					count++;
 			}
 			td++;
+			d++;
 		}
 		td = 0;
+		d = temp;
 		ti++;
+		i++;
 	}
-	if (counter == 1)
+	if (count == 1)
 		return (1);
 	return (0);
 }
@@ -98,35 +106,34 @@ void		ft_findplace_o(t_fillstr *vl)
 	int mp;
 
 	i = 0;
-	d = 4;
-	mp = 0;
+	d = 0;
+	mp = 1;
 	if (vl->field[vl->midfield[0]][vl->midfield[1]] == '.')
 		mp = 1;
-//	ft_printf("\n%d\n", mp);
 	while (i < vl->fieldl)
 	{
 		while (d < vl->fieldw)
 		{
 			if (ft_fitpiece_o(vl, i, d) && mp)
 			{
-				calc_and_save_coor_mf(vl, i, d);
+				ft_printf("y: %d\nx: %d\n\n", i, d);
+				//calc_and_save_coor_mf(vl, i, d);
 			}
 			else if (ft_fitpiece_o(vl, i, d) && !mp)
 			{
-				calc_and_save_coor_enemy(vl, i, d);
+				//calc_and_save_coor_enemy(vl, i, d);
 			}
 			d++;
 		}
-		d = 4;
+		d = 0;
 		i++;
 	}
 }
 
 void		ft_placepiece(t_fillstr *vl)
 {
-	vl->tokenl -= vl->offsetv;
-	vl->tokenw -= vl->offseth;
-	vl->fieldw += 4;
+//	vl->tokenl -= vl->offsetw;
+//	vl->tokenw -= vl->offsetl;
 	ft_findplace_o(vl);
-	ft_write(*vl);
+//	ft_write(*vl);
 }

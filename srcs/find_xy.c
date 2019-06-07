@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/31 16:02:33 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/07 11:38:59 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/07 20:17:36 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void		ft_findmidfield(t_fillstr *vl)
 {
-	vl->midfield[1] = vl->fieldw / 2 + 4;
+	vl->midfield[1] = vl->fieldw / 2;
 	vl->midfield[0] = vl->fieldl / 2;
 
-//	ft_printf("midfield: y=%d x=%d\n", vl->midfield[0], vl->midfield[1]);
+ft_printf("midfield: y=%d x=%d\n", vl->midfield[0], vl->midfield[1]);
 }
 
 void		ft_findcoor_xo(t_fillstr *vl)
@@ -29,7 +29,7 @@ void		ft_findcoor_xo(t_fillstr *vl)
 	d = 0;
 	while (i < vl->fieldl)
 	{
-		while (d < vl->fieldw + 4)
+		while (d < vl->fieldw)
 		{
 			if (vl->field[i][d] == 'O')
 			{
@@ -46,8 +46,8 @@ void		ft_findcoor_xo(t_fillstr *vl)
 		d = 0;
 		i++;
 	}
-//	ft_printf("\nX: x=%d y=%d\n", vl->x[0], vl->x[1]);
-//	ft_printf("O: x=%d y=%d\n", vl->o[0], vl->o[1]);
+ft_printf("X: x=%d y=%d\n", vl->x[0], vl->x[1]);
+ft_printf("O: x=%d y=%d\n", vl->o[0], vl->o[1]);
 }
 
 void		ft_findcoor(t_fillstr *vl)

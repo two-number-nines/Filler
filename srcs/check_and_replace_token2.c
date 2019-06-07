@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/31 13:54:56 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/06 19:25:42 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/07 13:33:20 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	ft_check_offset(t_fillstr *vl, char **tempstr)
 		d = 0;
 		i++;
 	}
-	ft_printf("\noff set horizon: %d\n", vl->offseth);
-	ft_printf("off set vertical: %d\n", vl->offsetv);
+//	ft_printf("\noff set horizon: %d\n", vl->offseth);
+//	ft_printf("off set vertical: %d\n", vl->offsetv);
 }
 
 int		save_token_line(char *tempstr, t_fillstr *vl, int a)
@@ -89,14 +89,14 @@ void	save_token(t_fillstr *vl, char **tempstr)
 		if (save_token_line(tempstr[i], vl, a))
 			a++;
 		i++;
+		free(tempstr[i]);
 	}
-	free(tempstr);
 	a = 0;
-	ft_printf("\n--------------\n");
-	ft_printf("the cut token:\n");
+//	ft_printf("\n--------------\n");
+//	ft_printf("the cut token:\n");
 	while (a < 3)
 	{
-		ft_printf("%s\n", vl->token[a]);
+//		ft_printf("%s\n", vl->token[a]);
 		a++;
 	}
 }

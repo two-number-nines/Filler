@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/29 15:55:32 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/03 14:03:53 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/07 13:42:05 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ void	ft_cutpiece(t_fillstr *vl)
 	b = 0;
 	i = 0;
 	tempstr = ft_strnsplit(vl->otoken, vl->tokenw);
-	ft_check_offset(vl, tempstr);
 	free(vl->otoken);
+	ft_check_offset(vl, tempstr);
 	while (tempstr[i])
 	{
 		ft_check_horizon(vl, tempstr[i]);

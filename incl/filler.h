@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/24 16:22:45 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/06 19:27:08 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/07 12:21:17 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FILLER_H
 
 # include "../libft/incl/libft.h"
+# include <stdio.h>
 
 /*
 ** player and comp are the char that match the player and comp
@@ -88,7 +89,7 @@ void				ft_findcoor(t_fillstr *vl);
 **	return_xy
 */
 
-void				ft_placepiece(t_fillstr *vl);
+void					ft_placepiece(t_fillstr *vl);
 void				calc_and_save_coor_enemy(t_fillstr *vl, int i, int d);
 
 /*

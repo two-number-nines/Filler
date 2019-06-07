@@ -6,18 +6,11 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/24 16:00:51 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/06 19:35:50 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/07 19:25:20 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/filler.h"
-
-// check if ft_strsplit deletes the char c
-// probable make the vl->field a 2d array and also make token a 2d array and finish the ft_cutpiece.
-//replace filedescriptor 1 with 0
-// waar de eerste ster linksboven bevind moet je de x y meegeven
-// mag er maar 1 overlappen
-// -> going to work on a check if i can place the token in a certain spot, after that make a algorithm
 
 void	ft_init(t_fillstr *vl)
 {
@@ -28,24 +21,18 @@ void	ft_init(t_fillstr *vl)
 void	ft_start_cond(void)
 {
 	t_fillstr 	vl;
-	int			i;
-	int			place;
 
-	i = 0;
-	place = 1;
-	ft_init(&vl);
-	ft_getplayer(&vl);
-	while (place)
-	{
+		ft_init(&vl);
+		ft_printf("----------\n");
+		ft_getplayer(&vl);
+		ft_printf("----------\n");
 		ft_getfield(&vl);
-		if (!i)
-		{
-			ft_findcoor(&vl);
-			i = 1;
-		}
+		ft_printf("----------\n");
+	//	ft_findcoor(&vl);
 		ft_getpiece(&vl);
-		place = ft_placepiece(&vl);
-	}
+		ft_printf("----------\n");
+	//	ft_placepiece(&vl);
+	while (1);
 }
 
 int		main(void)

@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/06/03 18:54:40 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/06 19:37:14 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/07 12:16:08 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,11 @@
 
 int		calc_coor_to_midfield(t_fillstr *vl, int lastx, int lasty)
 {
-	if ((lastx + lasty) - (vl->midfield[1] + vl->midfield[0]) <= (vl->coorsave[1] + vl->coorsave[0]))
+	int i;
+
+	i = (lastx + lasty) - (vl->midfield[1] + vl->midfield[0]);
+//	ft_printf("this is the value: %d\n", i);
+	if (i <= (vl->coorsave[1] + vl->coorsave[0]))
 	{
 		return (1);
 	}
@@ -47,13 +51,13 @@ void	calc_and_save_coor_mf(t_fillstr *vl, int i, int d)
 		td = 0;
 		ti++;
 	}
-	ft_printf("the field coor if the last * would be there: %d, %d\n", lastxy[0], lastxy[1]);
+//	ft_printf("mf the field coor if the last * would be there: %d, %d\n", lastxy[0], lastxy[1]);
 	if (calc_coor_to_midfield(vl, lastxy[0], lastxy[1]))
 	{
 		vl->coorsave[0] = d;
 		vl->coorsave[1] = i;
 	//	ft_printf("calc_coor was true ---- ");
-	ft_printf("it will go y: %d, and x: %d\n", i, d);
+//	ft_printf("it will go y: %d, and x: %d\n", i, d);
 	}
 }
 
@@ -87,7 +91,7 @@ int		ft_fitpiece_o(t_fillstr *vl, int i, int d)
 	return (0);
 }
 
-void	ft_findplace_o(t_fillstr *vl)
+void		ft_findplace_o(t_fillstr *vl)
 {
 	int i;
 	int d;
@@ -98,7 +102,7 @@ void	ft_findplace_o(t_fillstr *vl)
 	mp = 0;
 	if (vl->field[vl->midfield[0]][vl->midfield[1]] == '.')
 		mp = 1;
-	ft_printf("\n%d\n", mp);
+//	ft_printf("\n%d\n", mp);
 	while (i < vl->fieldl)
 	{
 		while (d < vl->fieldw)
@@ -111,8 +115,6 @@ void	ft_findplace_o(t_fillstr *vl)
 			{
 				calc_and_save_coor_enemy(vl, i, d);
 			}
-			else
-				return (0);
 			d++;
 		}
 		d = 4;
@@ -120,13 +122,11 @@ void	ft_findplace_o(t_fillstr *vl)
 	}
 }
 
-void	ft_placepiece(t_fillstr *vl)
+void		ft_placepiece(t_fillstr *vl)
 {
-	int place;
-
 	vl->tokenl -= vl->offsetv;
 	vl->tokenw -= vl->offseth;
 	vl->fieldw += 4;
-	place = ft_findplace_o(vl);
+	ft_findplace_o(vl);
 	ft_write(*vl);
 }

@@ -6,13 +6,11 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/29 14:19:54 by vmulder        #+#    #+#                */
-/*   Updated: 2019/05/29 15:50:05 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/07 14:08:09 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/filler.h"
-
-int fd = 3;
 
 /*
 ** stval is the structvalue im changing within the whileloops.

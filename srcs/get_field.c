@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/06/07 14:08:25 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/07 19:14:47 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/08 16:47:21 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_split(t_fillstr *vl)
 	vl->field = ft_strnsplit(vl->ofield, vl->fieldw);
 	while (i < vl->fieldl)
 	{
-		ft_printf("%s\n", vl->field[i]);
+	//	ft_printf("%s\n", vl->field[i]);
 		i++;
 	}
 	free(vl->ofield);
@@ -44,41 +44,53 @@ void	ft_get_str(t_fillstr *vl)
 	while (i)
 	{
 		get_next_line(globalfd, &tempvalue);
-		if (tempvalue[4] == 'O' ||  tempvalue[4] == 'X' || tempvalue[4] == '.')
+		if (tempvalue[4] == 'O' ||  tempvalue[4] == 'X' || tempvalue[4] == '.' || tempvalue[4] == 'o'
+			|| tempvalue[4] == 'x')
 			vl->ofield = ft_strcat(vl->ofield, &tempvalue[4]);
 		free(tempvalue);
 		i--;
 	}
-	ft_printf("fieldstr: %s\n", vl->ofield);
-	ft_printf("strlen: %d\n", ft_strlen(vl->ofield));
+//	ft_printf("fieldstr: %s\n", vl->ofield);
+//	ft_printf("strlen: %d\n", ft_strlen(vl->ofield));
 }
 
-static void	ft_get_len_wid(t_fillstr *vl)
+int	ft_get_len_wid(t_fillstr *vl)
 {
 	char	*tempvalue;
 	int		i;
+	int		ret;
 
 	i = 8;
 
-	get_next_line(globalfd, &tempvalue);
-	while (tempvalue[i] >= '0' && tempvalue[i] <= '9')
-	{
-		vl->fieldl = vl->fieldl * 10 + tempvalue[i] - '0';
+	ret = get_next_line(globalfd, &tempvalue);
+		if (ret)
+		{
+		while (tempvalue[i] >= '0' && tempvalue[i] <= '9')
+		{
+			vl->fieldl = vl->fieldl * 10 + tempvalue[i] - '0';
+			i++;
+		}
 		i++;
+		while (tempvalue[i] >= '0' && tempvalue[i] <= '9')
+		{
+			vl->fieldw = vl->fieldw * 10 + tempvalue[i] - '0';
+			i++;
+		}
+		free(tempvalue);
 	}
-	i++;
-	while (tempvalue[i] >= '0' && tempvalue[i] <= '9')
-	{
-		vl->fieldw = vl->fieldw * 10 + tempvalue[i] - '0';
-		i++;
-	}
-	free(tempvalue);
-	ft_printf("fl: %d\nfw: %d\n", vl->fieldl, vl->fieldw);
+//	ft_printf("fl: %d\nfw: %d\n", vl->fieldl, vl->fieldw);
+	return (ret);
 }
 
-void	ft_getfield(t_fillstr *vl)
+int	ft_getfield(t_fillstr *vl)
 {
-	ft_get_len_wid(vl);
-	ft_get_str(vl);
-	ft_split(vl);
+	int ret;
+
+	ret = ft_get_len_wid(vl);
+	if (ret)
+	{
+		ft_get_str(vl);
+		ft_split(vl);
+	}
+	return (ret);
 }

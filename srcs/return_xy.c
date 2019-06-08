@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/06/03 18:54:40 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/07 23:39:13 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/08 15:01:21 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,30 +99,32 @@ int		ft_fitpiece_o(t_fillstr *vl, int i, int d)
 	return (0);
 }
 
-void		ft_findplace_o(t_fillstr *vl)
+void		ft_findplace_o(t_fillstr *vl, t_coor vlc)
 {
 	int i;
 	int d;
-	int mp;
+	//int mp;
 
 	i = 0;
 	d = 0;
-	mp = 1;
-	if (vl->field[vl->midfield[0]][vl->midfield[1]] == '.')
-		mp = 1;
+//	mp = 1;
+//	if (vl->field[vl->midfield[0]][vl->midfield[1]] == '.')
+//		mp = 1;
 	while (i < vl->fieldl)
 	{
 		while (d < vl->fieldw)
 		{
-			if (ft_fitpiece_o(vl, i, d) && mp)
+			if (ft_fitpiece_o(vl, i, d))
 			{
-				ft_printf("y: %d\nx: %d\n\n", i, d);
+				vl->coorsave[0] = d;
+				vl->coorsave[1] = i;
+				//ft_printf("y: %d\nx: %d\n\n", i, d);
+				calc_and_save_coor_enemy(vl, vlc, i, d);
 				//calc_and_save_coor_mf(vl, i, d);
 			}
-			else if (ft_fitpiece_o(vl, i, d) && !mp)
-			{
-				//calc_and_save_coor_enemy(vl, i, d);
-			}
+			// else if (ft_fitpiece_o(vl, i, d) && !mp)
+			// {
+			// }
 			d++;
 		}
 		d = 0;
@@ -130,10 +132,10 @@ void		ft_findplace_o(t_fillstr *vl)
 	}
 }
 
-void		ft_placepiece(t_fillstr *vl)
+void		ft_placepiece(t_fillstr *vl, t_coor vlc)
 {
 //	vl->tokenl -= vl->offsetw;
 //	vl->tokenw -= vl->offsetl;
-	ft_findplace_o(vl);
-//	ft_write(*vl);
+	ft_findplace_o(vl, vlc);
+	ft_write(*vl);
 }

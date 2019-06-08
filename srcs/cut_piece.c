@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/29 15:55:32 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/07 22:27:14 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/08 14:31:21 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,11 @@ void			ft_cutpiece(t_fillstr *vl)
 	i = 0;
 	ft_check_w(vl);
 	ft_check_l(vl);
-	new_token(vl);
+	//new_token(vl);
 
 	while (i < vl->tokenl)
 	{
-		ft_printf("%s\n", vl->token[i]);
+	//	ft_printf("%s\n", vl->token[i]);
 		i++;
 	}
 }

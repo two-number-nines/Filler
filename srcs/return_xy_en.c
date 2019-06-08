@@ -6,22 +6,22 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/06/06 12:19:58 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/07 12:21:38 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/08 15:01:43 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/filler.h"
 
-int		calc_coor_to_enemy(t_fillstr *vl, int lastx, int lasty)
+int		calc_coor_to_enemy(t_fillstr *vl, t_coor vlc, int lastx, int lasty)
 {
-	if ((lastx + lasty) - (vl->x[1] + vl->x[0]) <= (vl->coorsave[1] + vl->coorsave[0]))
+	if ((lastx + lasty) - (vlc.x[1] + vlc.x[0]) <= (vl->coorsave[1] + vl->coorsave[0]))
 	{
 		return (1);
 	}
 	return (0);
 }
 
-void	calc_and_save_coor_enemy(t_fillstr *vl, int i, int d)
+void	calc_and_save_coor_enemy(t_fillstr *vl, t_coor vlc, int i, int d)
 {
 	int ti;
 	int td;
@@ -37,20 +37,20 @@ void	calc_and_save_coor_enemy(t_fillstr *vl, int i, int d)
 		{
 			if (vl->token[ti][td] == '*')
 			{
-				lastxy[0] = d + td;
-				lastxy[1] = i + ti;
+				lastxy[0] = d + td - vl->offsetw;
+				lastxy[1] = i + ti - vl->offsetl;
 			}
 			td++;
 		}
 		td = 0;
 		ti++;
 	}
-//	ft_printf("the field coor if the last * would be there: %d, %d\n", lastxy[0], lastxy[1]);
-	if (calc_coor_to_enemy(vl, lastxy[0], lastxy[1]))
+//	ft_printf("the field coor if the last * would be there: y:%d, x:%d\n", lastxy[1], lastxy[0]);
+	if (calc_coor_to_enemy(vl, vlc, lastxy[0], lastxy[1]))
 	{
 		vl->coorsave[0] = d;
 		vl->coorsave[1] = i;
-//		ft_printf("calc_coor was true ---- ");
-//		ft_printf("it will go y: %d, and x: %d\n", i, d);
+		// ft_printf("calc_coor was true ---- ");
+		// ft_printf("it will go y: %d, and x: %d\n", i, d);
 	}
 }

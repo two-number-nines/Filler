@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/24 16:22:45 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/07 22:28:04 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/08 16:45:37 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,6 @@
 
 typedef struct		s_fillstr
 {
-	char			player;
-	char			comp;
-
-	int				o[2];
-	int				x[2];
-	int				midfield[2];
-	
 	int				fieldw;
 	int				fieldl;
 	char			*ofield;
@@ -54,6 +47,21 @@ typedef struct		s_fillstr
 
 }					t_fillstr;
 
+typedef struct		s_players
+{
+	char			player;
+	char			comp;
+
+}					t_players;
+
+typedef struct		s_coor
+{
+	int				o[2];
+	int				x[2];
+	int				midfield[2];
+
+}					t_coor;
+
 int					main(void);
 
 /*
@@ -61,8 +69,8 @@ int					main(void);
 */
 
 void				ft_getpiece(t_fillstr *vl);
-void				ft_getfield(t_fillstr *vl);
-void				ft_getplayer(t_fillstr *vl);
+int					ft_getfield(t_fillstr *vl);
+void				ft_getplayer(t_players *vl);
 
 /*
 ** while_loops
@@ -84,14 +92,14 @@ void				new_token(t_fillstr *vl);
 **	find_xy
 */
 
-void				ft_findcoor(t_fillstr *vl);
+void		ft_findcoor(t_coor *vlc, t_fillstr vl);
 
 /*
 **	return_xy
 */
 
-void					ft_placepiece(t_fillstr *vl);
-void				calc_and_save_coor_enemy(t_fillstr *vl, int i, int d);
+void				ft_placepiece(t_fillstr *vl, t_coor vlc);
+void	calc_and_save_coor_enemy(t_fillstr *vl, t_coor vlc, int i, int d);
 
 /*
 ** write_coor

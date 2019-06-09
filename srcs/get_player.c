@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/29 14:21:58 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/08 16:48:42 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/09 19:00:42 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_getplayer(t_players *vl)
 {
 	char		*playerstring;
 
-	//globalfd = open("input.txt", O_RDONLY);
+//	globalfd = open("input.txt", O_RDONLY);
 	get_next_line(globalfd, &playerstring);
 	if (playerstring[10] == '1')
 	{

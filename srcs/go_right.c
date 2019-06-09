@@ -1,56 +1,57 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   return_xy_en.c                                     :+:    :+:            */
+/*   go_right.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/06/06 12:19:58 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/08 15:01:43 by vmulder       ########   odam.nl         */
+/*   Created: 2019/06/09 17:12:47 by vmulder        #+#    #+#                */
+/*   Updated: 2019/06/09 18:30:31 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/filler.h"
 
-int		calc_coor_to_enemy(t_fillstr *vl, t_coor vlc, int lastx, int lasty)
+int		calc_coor_to_right(t_fillstr *vl, int mostx)
 {
-	if ((lastx + lasty) - (vlc.x[1] + vlc.x[0]) <= (vl->coorsave[1] + vl->coorsave[0]))
+	int i;
+
+	i = mostx - (vl->fieldw);
+	if (i > (vl->coorsave[1] + vl->coorsave[0]))
 	{
 		return (1);
 	}
 	return (0);
 }
 
-void	calc_and_save_coor_enemy(t_fillstr *vl, t_coor vlc, int i, int d)
+void	calc_and_save_coor_gr(t_fillstr *vl, int i, int d)
 {
 	int ti;
 	int td;
-	int lastxy[2];
+	int mostx;
 
 	ti = 0;
 	td = 0;
-	lastxy[0] = 0;
-	lastxy[1] = 0;
+	mostx = 0;
 	while (ti < vl->tokenl)
 	{
 		while (td < vl->tokenw)
 		{
-			if (vl->token[ti][td] == '*')
+			if (vl->token[ti][td] == '*' && mostx < td)
 			{
-				lastxy[0] = d + td - vl->offsetw;
-				lastxy[1] = i + ti - vl->offsetl;
+				mostx = d + td - vl->offsetw;
 			}
 			td++;
 		}
 		td = 0;
 		ti++;
 	}
-//	ft_printf("the field coor if the last * would be there: y:%d, x:%d\n", lastxy[1], lastxy[0]);
-	if (calc_coor_to_enemy(vl, vlc, lastxy[0], lastxy[1]))
+//	ft_printf("mf the field coor if the last * would be there: %d, %d\n", lastxy[0], lastxy[1]);
+	if (calc_coor_to_right(vl, mostx))
 	{
 		vl->coorsave[0] = d;
 		vl->coorsave[1] = i;
-		// ft_printf("calc_coor was true ---- ");
-		// ft_printf("it will go y: %d, and x: %d\n", i, d);
+	//	ft_printf("calc_coor was true ---- ");
+//	ft_printf("it will go y: %d, and x: %d\n", i, d);
 	}
 }

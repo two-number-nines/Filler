@@ -6,28 +6,27 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/06/03 18:54:40 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/08 15:01:21 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/09 19:00:11 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/filler.h"
 // i worked on the return value, return value is now not yet prototyped correctly
 // then its ok and start testing for player is o.
-/*
-int		calc_coor_to_midfield(t_fillstr *vl, int lastx, int lasty)
+
+int		calc_coor_to_midfield(t_fillstr *vl, t_coor vlc, int lastx, int lasty)
 {
 	int i;
 
-	i = (lastx + lasty) - (vl->midfield[1] + vl->midfield[0]);
-//	ft_printf("this is the value: %d\n", i);
-	if (i <= (vl->coorsave[1] + vl->coorsave[0]))
+	i = (lastx + lasty) - (vlc.midfield[1] + vlc.midfield[0]);
+	if (i > (vl->coorsave[1] + vl->coorsave[0]))
 	{
 		return (1);
 	}
 	return (0);
 }
 
-void	calc_and_save_coor_mf(t_fillstr *vl, int i, int d)
+void	calc_and_save_coor_mf(t_fillstr *vl, t_coor vlc, int i, int d)
 {
 	int ti;
 	int td;
@@ -45,6 +44,11 @@ void	calc_and_save_coor_mf(t_fillstr *vl, int i, int d)
 			{
 				lastxy[0] = d + td;
 				lastxy[1] = i + ti;
+				if (calc_coor_to_midfield(vl, vlc, lastxy[0], lastxy[1]))
+				{
+					vl->coorsave[0] = d;
+					vl->coorsave[1] = i;
+				}
 			}
 			td++;
 		}
@@ -52,15 +56,9 @@ void	calc_and_save_coor_mf(t_fillstr *vl, int i, int d)
 		ti++;
 	}
 //	ft_printf("mf the field coor if the last * would be there: %d, %d\n", lastxy[0], lastxy[1]);
-	if (calc_coor_to_midfield(vl, lastxy[0], lastxy[1]))
-	{
-		vl->coorsave[0] = d;
-		vl->coorsave[1] = i;
-	//	ft_printf("calc_coor was true ---- ");
-//	ft_printf("it will go y: %d, and x: %d\n", i, d);
-	}
+
 }
-*/
+
 int		ft_fitpiece_o(t_fillstr *vl, int i, int d)
 {
 	int ti;
@@ -89,7 +87,7 @@ int		ft_fitpiece_o(t_fillstr *vl, int i, int d)
 			td++;
 			d++;
 		}
-		td = 0;
+		td = vl->offsetw;
 		d = temp;
 		ti++;
 		i++;
@@ -103,27 +101,52 @@ void		ft_findplace_o(t_fillstr *vl, t_coor vlc)
 {
 	int i;
 	int d;
-	//int mp;
+	int t;
+	int mp;
+	int br;
 
 	i = 0;
 	d = 0;
-//	mp = 1;
-//	if (vl->field[vl->midfield[0]][vl->midfield[1]] == '.')
-//		mp = 1;
+	t = 0;
+	mp = 0;
+	br = 0;
+	(void)vlc;
+	while (t < vl->fieldl)
+	{
+		if (vl->field[t][vl->fieldw - 1] == 'O')
+			br = 1;
+		t++;
+	}
+	t = 0;
+	while (t < vl->fieldw)
+	{
+		if (vl->field[vlc.midfield[0]][vlc.midfield[1]] != '.')
+			mp = 1;
+		t++;
+	}
+	while (t < vl->fieldw)
+	{
+		if (vl->field[vl->fieldl - 1][t] == 'O')
+			mp = 1;
+		t++;
+	}
 	while (i < vl->fieldl)
 	{
 		while (d < vl->fieldw)
 		{
-			if (ft_fitpiece_o(vl, i, d))
+			if (ft_fitpiece_o(vl, i, d) && !mp)
 			{
 				vl->coorsave[0] = d;
 				vl->coorsave[1] = i;
-				//ft_printf("y: %d\nx: %d\n\n", i, d);
-				calc_and_save_coor_enemy(vl, vlc, i, d);
-				//calc_and_save_coor_mf(vl, i, d);
+				calc_and_save_coor_mf(vl, vlc, i, d);
+			}
+			if (ft_fitpiece_o(vl, i, d) && mp)
+			{
+				calc_and_save_coor_gr(vl, i, d);
 			}
 			// else if (ft_fitpiece_o(vl, i, d) && !mp)
 			// {
+			// 	calc_and_save_coor_enemy(vl, vlc, i, d);
 			// }
 			d++;
 		}
@@ -134,8 +157,6 @@ void		ft_findplace_o(t_fillstr *vl, t_coor vlc)
 
 void		ft_placepiece(t_fillstr *vl, t_coor vlc)
 {
-//	vl->tokenl -= vl->offsetw;
-//	vl->tokenw -= vl->offsetl;
 	ft_findplace_o(vl, vlc);
 	ft_write(*vl);
 }

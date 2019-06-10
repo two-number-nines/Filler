@@ -6,7 +6,7 @@
 #    By: vmulder <vmulder@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/04/22 14:18:40 by vmulder        #+#    #+#                 #
-#    Updated: 2019/06/10 09:45:10 by vmulder       ########   odam.nl          #
+#    Updated: 2019/06/10 13:51:46 by vmulder       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRC_PATH  = srcs
 SOURCES = main.c get_player.c get_field.c \
 			find_xy.c find_fit_o.c \
 			write_coor.c get_piece.c check_offset.c \
-			go_enemy.c go_right.c
+			go_enemy.c go_right.c map_utils.c
 
 ### OBJECTS ###
 

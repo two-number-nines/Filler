@@ -1,35 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_player.c                                       :+:    :+:            */
+/*   map_utils.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/05/29 14:21:58 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/10 17:13:17 by vmulder       ########   odam.nl         */
+/*   Created: 2019/06/10 13:03:25 by vmulder        #+#    #+#                */
+/*   Updated: 2019/06/10 15:22:03 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/filler.h"
 
-int globalfd;
-
-void	ft_getplayer(t_players *vl)
+int			ft_sqrt(int n)
 {
-	char		*playerstring;
+		int count;
+		int x;
+		int i;
 
-	//globalfd = open("input.txt", O_RDONLY);
-	get_next_line(globalfd, &playerstring);
-	if (playerstring[10] == '1')
-	{
-		vl->player = 'O';
-		vl->comp = 'X';
-	}
-	else
-	{
-		vl->player = 'X';
-		vl->comp = 'O';
-	}
-	free(playerstring);
-//	ft_printf("the player: %c\nthe comp: %c\n", vl->player, vl->comp);
+		x = 0;
+		count = 0;
+		i = 1;
+		while (x < n)
+		{
+			x = x + i;
+			count++;
+			i += 2;
+		}
+	return (count);
+}
+
+int			ft_distance(int *enemy, int *tokencoor)
+{
+	int x;
+	int y;
+	int dist;
+
+	x = enemy[0] - tokencoor[0];
+	y = enemy[1] - tokencoor[1];
+	dist = ft_sqrt((x*x) + (y*y));
+	return (dist);
 }

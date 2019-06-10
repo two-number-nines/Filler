@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/24 16:22:45 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/10 11:39:35 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/10 16:29:54 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ typedef struct		s_players
 typedef struct		s_coor
 {
 	int				o[2];
+	int				lo;
 	int				x[2];
+	int				xl[2];
+	int				ol[2];
 	int				midfield[2];
 
 }					t_coor;
@@ -115,5 +118,7 @@ void				ft_write(t_fillstr vl);
 
 void	calc_and_save_coor_gr(t_fillstr *vl, int i, int d);
 void		ft_latest_x(t_fillstr *vl, t_coor *vlc);
+
+int			ft_distance(int *enemy, int *tokencoor);
 
 #endif

@@ -6,71 +6,86 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/06/06 12:19:58 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/10 11:59:19 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/10 17:48:56 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/filler.h"
 
-int			ft_sqrt(int n)
+/*
+** this function checks if there are already a o and x on the left side or
+** on the ceiling of the field
+*/
+
+/*
+** play around with the -vlc xl and see the impact.
+** it destroys every player on big maps but map 00 is hard, try to block the walls
+*/
+
+int		ft_check_rightwall(t_fillstr *vl)
 {
-		int count;
-		int x;
-		int i;
-
-		x = 0;
-		count = 0;
-		i = 1;
-		while (x < n)
-		{
-			x = x + i;
-			count++;
-			i += 2;
-		}
-	return (count);
-}
-
-int			ft_distance(int *enemy, int *tokencoor)
-{
-	int x;
-	int y;
-	int dist;
-
-	x = enemy[0] - tokencoor[0];
-	y = enemy[1] - tokencoor[1];
-	dist = ft_sqrt((x*x) + (y*y));
-	return (dist);
-}
-
-void		ft_latest_x(t_fillstr *vl, t_coor *vlc)
-{
-	int i;
 	int d;
-	int b;
+	int o;
+	int x;
 
-	i = 0;
 	d = 0;
-	b = 0;
-	while (i < vl->fieldl)
+	o = 0;
+	x = 0;
+	while (d < vl->fieldl)
 	{
-		while (d < vl->fieldw)
-		{
-			if (vl->field[i][d] == 'X')
-			{
-				vlc->x[0] = d;
-				vlc->x[1] = i;
-				b = 1;
-				break ;
-			}
-			d++;
-		}
-		if (b)
-			break;
-		d = 0;
-		i++;
+		if (vl->field[d][vl->fieldl] == 'o' || vl->field[d][vl->fieldl] == 'O')
+			o = 1;
+		d++;
 	}
+	if (o)
+		return (1);
+	return (0);
 }
 
+int		ft_check_leftwall(t_fillstr *vl)
+{
+	int d;
+	int o;
+	int x;
+
+	d = 0;
+	o = 0;
+	x = 0;
+	while (d < vl->fieldl)
+	{
+		if (vl->field[d][0] == 'x' || vl->field[d][0] == 'X')
+			x = 1;
+		if (vl->field[d][0] == 'o' || vl->field[d][0] == 'O')
+			o = 1;
+		d++;
+	}
+	if (x && o)
+		return (1);
+	if (o)
+		return (2);
+	return (0);
+}
+
+int		ft_check_ceiling(t_fillstr *vl)
+{
+	int d;
+	int o;
+	int x;
+
+	d = 0;
+	o = 0;
+	x = 0;
+	while (d < vl->fieldw)
+	{
+		if (vl->field[0][d] == 'o' || vl->field[0][d] == 'O')
+			o = 1;
+		d++;
+	}
+	if (o)
+		return (1);
+	return (0);
+}
+//now it should go in the ffff else if
 void	calc_and_save_coor_enemy(t_fillstr *vl, t_coor vlc, int i, int d)
 {
 	int ti;
@@ -90,9 +105,29 @@ void	calc_and_save_coor_enemy(t_fillstr *vl, t_coor vlc, int i, int d)
 			{
 				lastxy[0] = d + td - vl->offsetw;
 				lastxy[1] = i + ti - vl->offsetl;
-				temp = ft_distance(vlc.x, lastxy);
+				if ((ft_check_ceiling(vl) || ft_check_leftwall(vl)) || (
+					ft_check_leftwall(vl) == 2 && ft_check_ceiling(vl)) ||
+					ft_check_rightwall(vl))
+				{
+					temp = ft_distance(vlc.x, lastxy);
+				}
+				//else if ((ft_check_ceiling(vl) || ft_check_rightwall(vl)) &&
+			//				!ft_check_leftwall(vl))
+			//	{
+			//		vlc.x[0] = 0;
+			//		vlc.x[1] = vlc.lo;
+			//		temp = ft_distance(vlc.xl, lastxy);
+		//		}
+				else
+				{
+					temp = ft_distance(vlc.xl, lastxy);
+				}
+				// ft_printf("temp: %d\n", temp);
+				// if (temp == 2)
+				// 	ft_printf("the x and y: x: %d y: %d\n", lastxy[0], lastxy[1]);
+				// ft_printf("distance: %d\n", vl->distance);
 			}
-			if (temp <= vl->distance)
+			if (temp < vl->distance && temp)
 			{
 				vl->distance = temp;
 				vl->coorsave[0] = d;

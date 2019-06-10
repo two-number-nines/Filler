@@ -1,38 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   cut_piece2.c                                       :+:    :+:            */
+/*   go_midfield.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/05/29 15:55:32 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/07 22:30:49 by vmulder       ########   odam.nl         */
+/*   Created: 2019/06/10 09:42:26 by vmulder        #+#    #+#                */
+/*   Updated: 2019/06/10 09:48:09 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/filler.h"
 
-void	new_token(t_fillstr *vl)
+void	calc_and_save_coor_mf(t_fillstr *vl, t_coor vlc, int i, int d)
 {
-	int i;
-	int d;
-	int c;
+	int ti;
+	int td;
+	int lastxy[2];
 
-	i = 0;
-	d = 0;
-	c = 0;
-	while (i < vl->tokenl)
+	ti = 0;
+	td = 0;
+	while (ti < vl->tokenl)
 	{
-		while (d < vl->tokenw)
+		while (td < vl->tokenw)
 		{
-			if (vl->token[i][d] == '*' || vl->token[i][d] == '.')
-				c = 1;
-			d++;
+			if (vl->token[ti][td] == '*')
+			{
+				lastxy[0] = d + td;
+				lastxy[1] = i + ti;
+			}
+			td++;
 		}
-		if (!c)
-			ft_strdel(&vl->token[i]);
-		d = 0;
-		c = 0;
-		i++;
+		td = 0;
+		ti++;
 	}
 }

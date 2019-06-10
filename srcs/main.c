@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/24 16:00:51 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/08 16:48:16 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/10 11:56:45 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	ft_init_vl(t_fillstr *vl)
 {
 	ft_bzero(vl, sizeof(t_fillstr));
+	vl->distance = 1000;
 }
 
 void	ft_init(t_coor *vlc, t_players *vlp)

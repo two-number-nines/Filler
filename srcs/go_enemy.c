@@ -1,24 +1,74 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   return_xy_en.c                                     :+:    :+:            */
+/*   go_enemy.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/06/06 12:19:58 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/09 14:13:06 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/10 11:59:19 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/filler.h"
 
-int		calc_coor_to_enemy(t_fillstr *vl, t_coor vlc, int lastx, int lasty)
+int			ft_sqrt(int n)
 {
-	if ((lastx + lasty) - (vlc.x[1] + vlc.x[0]) < (vl->coorsave[1] + vl->coorsave[0]))
+		int count;
+		int x;
+		int i;
+
+		x = 0;
+		count = 0;
+		i = 1;
+		while (x < n)
+		{
+			x = x + i;
+			count++;
+			i += 2;
+		}
+	return (count);
+}
+
+int			ft_distance(int *enemy, int *tokencoor)
+{
+	int x;
+	int y;
+	int dist;
+
+	x = enemy[0] - tokencoor[0];
+	y = enemy[1] - tokencoor[1];
+	dist = ft_sqrt((x*x) + (y*y));
+	return (dist);
+}
+
+void		ft_latest_x(t_fillstr *vl, t_coor *vlc)
+{
+	int i;
+	int d;
+	int b;
+
+	i = 0;
+	d = 0;
+	b = 0;
+	while (i < vl->fieldl)
 	{
-		return (1);
+		while (d < vl->fieldw)
+		{
+			if (vl->field[i][d] == 'X')
+			{
+				vlc->x[0] = d;
+				vlc->x[1] = i;
+				b = 1;
+				break ;
+			}
+			d++;
+		}
+		if (b)
+			break;
+		d = 0;
+		i++;
 	}
-	return (0);
 }
 
 void	calc_and_save_coor_enemy(t_fillstr *vl, t_coor vlc, int i, int d)
@@ -26,6 +76,7 @@ void	calc_and_save_coor_enemy(t_fillstr *vl, t_coor vlc, int i, int d)
 	int ti;
 	int td;
 	int lastxy[2];
+	int temp;
 
 	ti = 0;
 	td = 0;
@@ -39,18 +90,17 @@ void	calc_and_save_coor_enemy(t_fillstr *vl, t_coor vlc, int i, int d)
 			{
 				lastxy[0] = d + td - vl->offsetw;
 				lastxy[1] = i + ti - vl->offsetl;
+				temp = ft_distance(vlc.x, lastxy);
+			}
+			if (temp <= vl->distance)
+			{
+				vl->distance = temp;
+				vl->coorsave[0] = d;
+				vl->coorsave[1] = i;
 			}
 			td++;
 		}
 		td = 0;
 		ti++;
-	}
-//	ft_printf("the field coor if the last * would be there: y:%d, x:%d\n", lastxy[1], lastxy[0]);
-	if (calc_coor_to_enemy(vl, vlc, lastxy[0], lastxy[1]))
-	{
-		vl->coorsave[0] = d;
-		vl->coorsave[1] = i;
-		// ft_printf("calc_coor was true ---- ");
-		// ft_printf("it will go y: %d, and x: %d\n", i, d);
 	}
 }

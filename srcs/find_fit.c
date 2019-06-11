@@ -1,43 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   find_fit_o.c                                       :+:    :+:            */
+/*   find_fit.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/06/03 18:54:40 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/10 16:31:23 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/11 16:41:21 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/filler.h"
 
-void		ft_most_left_o(t_fillstr *vl, t_coor *vlc)
+/*
+** find the position of enemy in field.
+*/
+
+void		ft_last_enemy_when_pl(t_fillstr *vl, t_coor *vlc)
 {
 	int i;
 	int d;
 	int b;
 
-	i = 0;
-	d = 0;
-	b = vl->fieldw;
-	while (i < vl->fieldl)
+	i = vl->fieldl - 1;
+	d = vl->fieldw - 1;
+	b = 0;
+	while (0 < i)
 	{
-		while (d < vl->fieldw)
+		while (0 < d)
 		{
-			if (vl->field[i][d] == 'O' || vl->field[i][d] == 'o')
+			if (vl->field[i][d] == vlc->comp)
 			{
-				if (d < b)
-					vlc->lo = i;
+				if (d + 2 < vl->fieldw)
+					vlc->el[0] = d + 2;
+				else
+					vlc->el[0] = d;
+				if (i > 0)
+					vlc->el[1] = i - 1;
+				else
+					vlc->el[1] = i;
+				
+				b = 1;
+				break ;
 			}
-			d++;
+			d--;
 		}
+		if (b)
+			break;
 		d = 0;
-		i++;
+		i--;
 	}
 }
 
-void		ft_latest_x(t_fillstr *vl, t_coor *vlc)
+void		ft_last_enemy_when_ph(t_fillstr *vl, t_coor *vlc)
 {
 	int i;
 	int d;
@@ -50,16 +65,16 @@ void		ft_latest_x(t_fillstr *vl, t_coor *vlc)
 	{
 		while (d < vl->fieldw)
 		{
-			if (vl->field[i][d] == 'X' || vl->field[i][d] == 'x')
+			if (vl->field[i][d] == vlc->comp)
 			{
 				if (d + 2 < vl->fieldw)
-					vlc->xl[0] = d + 2;
+					vlc->el[0] = d + 2;
 				else
-					vlc->xl[0] = d;
+					vlc->el[0] = d;
 				if (i > 0)
-					vlc->xl[1] = i - 1;
+					vlc->el[1] = i - 1;
 				else
-					vlc->xl[1] = i;
+					vlc->el[1] = i;
 				
 				b = 1;
 				break ;
@@ -73,7 +88,21 @@ void		ft_latest_x(t_fillstr *vl, t_coor *vlc)
 	}
 }
 
-int		ft_fitpiece_o(t_fillstr *vl, int i, int d)
+/*
+** check the latest enemy piece on the board.
+** (if) is for as the player begins lower in the field.
+*/
+
+void		ft_latest_e(t_fillstr *vl, t_coor *vlc)
+{
+	if (vlc->playc[1] > vlc->compc[1])
+		ft_last_enemy_when_pl(vl, vlc);
+	else
+		ft_last_enemy_when_ph(vl, vlc);
+	
+}
+
+int		ft_fitpiece(t_fillstr *vl, t_coor vlc, int i, int d)
 {
 	int ti;
 	int td;
@@ -93,9 +122,9 @@ int		ft_fitpiece_o(t_fillstr *vl, int i, int d)
 					return (0);
 			if (vl->token[ti][td] == '*' && d < vl->fieldw && i < vl->fieldl)
 			{
-				if (vl->field[i][d] == 'X')
+				if (vl->field[i][d] == vlc.comp)
 					return (0);
-				else if (vl->field[i][d] == 'O')
+				else if (vl->field[i][d] == vlc.player)
 					count++;
 			}
 			td++;
@@ -111,22 +140,23 @@ int		ft_fitpiece_o(t_fillstr *vl, int i, int d)
 	return (0);
 }
 
-void		ft_findplace_o(t_fillstr *vl, t_coor vlc)
+void		ft_findplace(t_fillstr *vl, t_coor vlc)
 {
 	int i;
 	int d;
 	int first;
+	int wall;
 
 	i = 0;
 	d = 0;
 	first = 0;
-	(void)vlc;
-	ft_latest_x(vl, &vlc);
+	wall = 0;
+	ft_latest_e(vl, &vlc);
 	while (i < vl->fieldl)
 	{
 		while (d < vl->fieldw)
 		{
-			if (ft_fitpiece_o(vl, i, d))
+			if (ft_fitpiece(vl, vlc, i, d))
 			{
 				if (!first)
 				{
@@ -134,7 +164,13 @@ void		ft_findplace_o(t_fillstr *vl, t_coor vlc)
 					vl->coorsave[1] = i;
 				}
 				first = 1;
-				calc_and_save_coor_enemy(vl, vlc, i, d);
+				if (calc_and_go_wall(vl, vlc, i, d))
+				{
+					ft_printf("if it displays its wrong");
+					wall = 1;
+				}
+				else if (!wall)	
+					calc_and_save_coor_enemy(vl, vlc, i, d);
 			}
 			d++;
 		}
@@ -145,6 +181,6 @@ void		ft_findplace_o(t_fillstr *vl, t_coor vlc)
 
 void		ft_placepiece(t_fillstr *vl, t_coor vlc)
 {
-	ft_findplace_o(vl, vlc);
+	ft_findplace(vl, vlc);
 	ft_write(*vl);
 }

@@ -6,19 +6,19 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/29 14:21:58 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/10 17:13:17 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/11 18:31:48 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/filler.h"
 
-int globalfd;
+int globalfd = 0;
 
-void	ft_getplayer(t_players *vl)
+void	ft_getplayer(t_coor *vl)
 {
 	char		*playerstring;
 
-	//globalfd = open("input.txt", O_RDONLY);
+//	globalfd = open("input.txt", O_RDONLY);
 	get_next_line(globalfd, &playerstring);
 	if (playerstring[10] == '1')
 	{
@@ -31,5 +31,4 @@ void	ft_getplayer(t_players *vl)
 		vl->comp = 'O';
 	}
 	free(playerstring);
-//	ft_printf("the player: %c\nthe comp: %c\n", vl->player, vl->comp);
 }

@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/24 16:22:45 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/10 16:29:54 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/11 16:43:27 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,24 +46,16 @@ typedef struct		s_fillstr
 	int				coorsave[2];
 	int				mostx;
 	int				distance;
-
 }					t_fillstr;
 
-typedef struct		s_players
+typedef struct		s_coor
 {
 	char			player;
 	char			comp;
 
-}					t_players;
-
-typedef struct		s_coor
-{
-	int				o[2];
-	int				lo;
-	int				x[2];
-	int				xl[2];
-	int				ol[2];
-	int				midfield[2];
+	int				playc[2];
+	int				compc[2];
+	int				el[2];
 
 }					t_coor;
 
@@ -75,7 +67,7 @@ int					main(void);
 
 void				ft_getpiece(t_fillstr *vl);
 int					ft_getfield(t_fillstr *vl);
-void				ft_getplayer(t_players *vl);
+void				ft_getplayer(t_coor *vl);
 
 /*
 ** while_loops
@@ -104,7 +96,8 @@ void		ft_findcoor(t_coor *vlc, t_fillstr vl);
 */
 
 void				ft_placepiece(t_fillstr *vl, t_coor vlc);
-void	calc_and_save_coor_enemy(t_fillstr *vl, t_coor vlc, int i, int d);
+void				calc_and_save_coor_enemy(t_fillstr *vl, t_coor vlc, int i, int d);
+void				calc_and_save_coor_mf(t_fillstr *vl, t_coor vlc, int i, int d);
 
 /*
 ** write_coor
@@ -120,5 +113,20 @@ void	calc_and_save_coor_gr(t_fillstr *vl, int i, int d);
 void		ft_latest_x(t_fillstr *vl, t_coor *vlc);
 
 int			ft_distance(int *enemy, int *tokencoor);
+
+/*
+**	check_walls
+*/
+
+int		ft_check_ceiling(t_fillstr *vl, t_coor vlc);
+int		ft_check_leftwall(t_fillstr *vl, t_coor vlc);
+int		ft_check_rightwall(t_fillstr *vl, t_coor vlc);
+int		ft_check_bottom(t_fillstr *vl, t_coor vlc);
+
+/*
+**	go walls
+*/
+
+int		calc_and_go_wall(t_fillstr *vl, t_coor vlc, int i, int d);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/06/07 14:08:25 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/08 16:47:21 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/11 15:43:09 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@ void	ft_split(t_fillstr *vl)
 
 	i = 0;
 	vl->field = ft_strnsplit(vl->ofield, vl->fieldw);
-	while (i < vl->fieldl)
-	{
-	//	ft_printf("%s\n", vl->field[i]);
-		i++;
-	}
+	// while (i < vl->fieldl)
+	// {
+	// 	i++;
+	// }
 	free(vl->ofield);
 }
 
@@ -50,8 +49,6 @@ void	ft_get_str(t_fillstr *vl)
 		free(tempvalue);
 		i--;
 	}
-//	ft_printf("fieldstr: %s\n", vl->ofield);
-//	ft_printf("strlen: %d\n", ft_strlen(vl->ofield));
 }
 
 int	ft_get_len_wid(t_fillstr *vl)

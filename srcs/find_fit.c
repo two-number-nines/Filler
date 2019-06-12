@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/06/03 18:54:40 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/11 16:41:21 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/12 16:26:21 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,10 @@ void		ft_last_enemy_when_pl(t_fillstr *vl, t_coor *vlc)
 		}
 		if (b)
 			break;
-		d = 0;
+		d = vl->fieldw - 1;
 		i--;
 	}
+//	ft_printf("the enemy x and y: %d, %d\n", vlc->el[0], vlc->el[1]);
 }
 
 void		ft_last_enemy_when_ph(t_fillstr *vl, t_coor *vlc)
@@ -67,13 +68,13 @@ void		ft_last_enemy_when_ph(t_fillstr *vl, t_coor *vlc)
 		{
 			if (vl->field[i][d] == vlc->comp)
 			{
-				if (d + 2 < vl->fieldw)
-					vlc->el[0] = d + 2;
-				else
+			//	if (d + 2 < vl->fieldw)
+			//		vlc->el[0] = d + 2;
+			//	else
 					vlc->el[0] = d;
-				if (i > 0)
-					vlc->el[1] = i - 1;
-				else
+			//	if (i > 0)
+			//		vlc->el[1] = i - 1;
+			//	else
 					vlc->el[1] = i;
 				
 				b = 1;
@@ -86,6 +87,7 @@ void		ft_last_enemy_when_ph(t_fillstr *vl, t_coor *vlc)
 		d = 0;
 		i++;
 	}
+	//ft_printf("the enemy x and y: %d, %d\n", vlc->el[0], vlc->el[1]);
 }
 
 /*
@@ -95,11 +97,37 @@ void		ft_last_enemy_when_ph(t_fillstr *vl, t_coor *vlc)
 
 void		ft_latest_e(t_fillstr *vl, t_coor *vlc)
 {
-	if (vlc->playc[1] > vlc->compc[1])
-		ft_last_enemy_when_pl(vl, vlc);
+	if (vlc->playc[1] > vlc->compc[1]) // als player onder start.
+	{
+		if (ft_check_ceiling(vl, *vlc)) // als we naar beneden moeten
+		{
+			//ft_last_enemy_when_pl(vl, vlc);
+			if (ft_check_bottom(vl, *vlc)) // als we ook beneden zijn geweest en naar midden willen
+			{
+				vlc->el[0] = 0;
+				vlc->el[1] = vl->fieldl - (vl->fieldl / 3);
+			}
+			else
+			{
+				vlc->el[0] = (vl->fieldw / 2);
+				vlc->el[1] = (vl->fieldl);
+			}
+		}
+		else
+		{
+			//ft_last_enemy_when_ph(vl, vlc);
+			vlc->el[0] = (vl->fieldw / 2 + (vl->fieldw / 5));
+			vlc->el[1] = 0;
+		}
+	}
 	else
-		ft_last_enemy_when_ph(vl, vlc);
-	
+	{
+		if (ft_check_bottom(vl, *vlc)) // als we onder zijn is het true.
+			ft_last_enemy_when_ph(vl, vlc);
+		else
+			ft_last_enemy_when_pl(vl, vlc);
+	}
+//	ft_printf("the the enemy position: x:%d, y:%d\n", vlc->el[0], vlc->el[1]);
 }
 
 int		ft_fitpiece(t_fillstr *vl, t_coor vlc, int i, int d)
@@ -166,7 +194,6 @@ void		ft_findplace(t_fillstr *vl, t_coor vlc)
 				first = 1;
 				if (calc_and_go_wall(vl, vlc, i, d))
 				{
-					ft_printf("if it displays its wrong");
 					wall = 1;
 				}
 				else if (!wall)	

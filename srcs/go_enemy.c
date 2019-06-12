@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/06/06 12:19:58 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/11 16:11:31 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/12 11:50:11 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ void	calc_and_save_coor_enemy(t_fillstr *vl, t_coor vlc, int i, int d)
 				lastxy[1] = i + ti - vl->offsetl;
 				temp = ft_distance(vlc.el, lastxy);
 			}
+//			ft_printf("the temp(so distance to enemy): %d\n", temp);
+			//if (temp == 0)
+//			ft_printf("the x and y, %d %d\n", d, i);
 			if (temp < vl->distance && temp)
 			{
 				vl->distance = temp;

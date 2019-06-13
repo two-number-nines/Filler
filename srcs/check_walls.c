@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/06/11 10:01:25 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/12 16:31:08 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/13 15:43:18 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int		ft_check_bottom(t_fillstr *vl, t_coor vlc)
 	while (d < vl->fieldw)
 	{
 		if (vl->field[vl->fieldl - 1][d] == vlc.player || 
-			vl->field[vl->fieldl - 1][d] == vlc.comp)
+			(vl->field[vl->fieldl - 1][d] == vlc.comp && vlc.playc[1] > vlc.compc[1]))
 			o = 1;
 		d++;
 	}

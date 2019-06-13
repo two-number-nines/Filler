@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/06/06 12:19:58 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/12 11:50:11 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/13 15:21:11 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	calc_and_save_coor_enemy(t_fillstr *vl, t_coor vlc, int i, int d)
 				vl->coorsave[0] = d;
 				vl->coorsave[1] = i;
 			}
+			
 			td++;
 		}
 		td = 0;

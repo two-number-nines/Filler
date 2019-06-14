@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/06/10 13:03:25 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/14 13:22:06 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/14 17:42:02 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,26 @@ static int	ft_sqrt(int n)
 	return (count);
 }
 
-void		ft_init_walls(t_fillstr *vl, int *ti, int *td)
+void		ft_el_help(t_fillstr *vl, t_coor *vlc, int on)
+{
+	if (on == 1)
+	{
+		vlc->el[0] = 0;
+		vlc->el[1] = vl->fldl - (vl->fldl / 3);
+	}
+	else if (on == 2)
+	{
+		vlc->el[0] = (vl->fldw / 2 - (vl->fldw / 5));
+		vlc->el[1] = vl->fldl;
+	}
+	else
+	{
+		vlc->el[0] = (vl->fldw / 2 + (vl->fldw / 5));
+		vlc->el[1] = 0;
+	}
+}
+
+void		ft_init_offset(t_fillstr *vl, int *ti, int *td)
 {
 	(*ti) = vl->offsetl;
 	(*td) = vl->offsetw;

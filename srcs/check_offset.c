@@ -6,21 +6,26 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/06/07 19:06:09 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/08 13:42:31 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/14 19:10:04 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/filler.h"
 
-void	ft_check_offset_l(t_fillstr *vl)
+static void	ft_init_offsets(int *i, int *d, int *a)
+{
+	(*i) = 0;
+	(*d) = 0;
+	(*a) = 0;
+}
+
+void		ft_check_offset_l(t_fillstr *vl)
 {
 	int i;
 	int d;
 	int a;
 
-	i = 0;
-	d = 0;
-	a = 0;
+	ft_init_offsets(&i, &d, &a);
 	while (i < vl->tokenl)
 	{
 		while (d < vl->tokenw)
@@ -40,18 +45,15 @@ void	ft_check_offset_l(t_fillstr *vl)
 		i++;
 		d = 0;
 	}
-//	ft_printf("offsetl: %d\n", vl->offsetl);
 }
 
-void	ft_check_offset_w(t_fillstr *vl)
+void		ft_check_offset_w(t_fillstr *vl)
 {
 	int i;
 	int d;
 	int a;
 
-	i = 0;
-	d = 0;
-	a = 0;
+	ft_init_offsets(&i, &d, &a);
 	while (d < vl->tokenw)
 	{
 		while (i < vl->tokenl)
@@ -71,5 +73,4 @@ void	ft_check_offset_w(t_fillstr *vl)
 		i = 0;
 		d++;
 	}
-//	ft_printf("offsetw: %d\n", vl->offsetw);
 }

@@ -6,15 +6,13 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/06/07 19:06:09 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/14 13:55:49 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/14 19:11:54 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/filler.h"
 
-int globalfd;
-
-static void	ft_split(t_fillstr *vl)
+static void		ft_split(t_fillstr *vl)
 {
 	int i;
 
@@ -37,7 +35,7 @@ static void		ft_get_str(t_fillstr *vl)
 	i = vl->tokenl;
 	while (i)
 	{
-		get_next_line(globalfd, &tempvalue);
+		get_next_line(0, &tempvalue);
 		vl->otoken = ft_strcat(vl->otoken, tempvalue);
 		free(tempvalue);
 		i--;
@@ -50,7 +48,7 @@ static void		ft_get_len_wid(t_fillstr *vl)
 	int		i;
 
 	i = 6;
-	get_next_line(globalfd, &tempvalue);
+	get_next_line(0, &tempvalue);
 	while (tempvalue[i] >= '0' && tempvalue[i] <= '9')
 	{
 		vl->tokenl = vl->tokenl * 10 + tempvalue[i] - '0';

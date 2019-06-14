@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/24 16:22:45 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/14 13:22:02 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/14 19:23:57 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FILLER_H
 
 # include "../libft/incl/libft.h"
-# include <stdio.h>
 
 /*
 ** player and comp are the char that match the player and comp
@@ -30,8 +29,8 @@
 
 typedef struct		s_fillstr
 {
-	int				fieldw;
-	int				fieldl;
+	int				fldw;
+	int				fldl;
 	char			*ofield;
 	char			**field;
 
@@ -59,10 +58,14 @@ typedef struct		s_coor
 
 }					t_coor;
 
-int					main(void);
+/*
+** main
+*/
+
+void				ft_write(t_fillstr vl);
 
 /*
-** get_data
+** get data
 */
 
 void				ft_getpiece(t_fillstr *vl);
@@ -70,26 +73,17 @@ int					ft_getfield(t_fillstr *vl);
 void				ft_getplayer(t_coor *vl);
 
 /*
-** while_loops
-*/
-
-int					ft_whileloop_get(char *condit, int *stval, int i);
-void				ft_wlp_get_sd(char **condit, char **stval, int i, int fd);
-
-/*
-** check and replace 1 and 2
+** check offsets
 */
 
 void				ft_check_offset_l(t_fillstr *vl);
 void				ft_check_offset_w(t_fillstr *vl);
-void				ft_cutpiece(t_fillstr *vl);
-void				new_token(t_fillstr *vl);
 
 /*
 **	find_xy
 */
 
-void		ft_findcoor(t_coor *vlc, t_fillstr vl);
+void				ft_findcoor_xo(t_coor *vlc, t_fillstr vl);
 
 /*
 **	return_xy
@@ -97,22 +91,8 @@ void		ft_findcoor(t_coor *vlc, t_fillstr vl);
 
 void				ft_placepiece(t_fillstr *vl, t_coor vlc);
 void				calc_and_save_coor_enemy(t_fillstr *vl, t_coor vlc, int i, int d);
-void				calc_and_save_coor_mf(t_fillstr *vl, t_coor vlc, int i, int d);
+void				ft_latest_e(t_fillstr *vl, t_coor *vlc);
 
-/*
-** write_coor
-*/
-
-void				ft_write(t_fillstr vl);
-
-/*
-** go_right
-*/
-
-void	calc_and_save_coor_gr(t_fillstr *vl, int i, int d);
-void		ft_latest_x(t_fillstr *vl, t_coor *vlc);
-
-int			ft_distance(int *enemy, int *tokencoor);
 
 /*
 **	check_walls
@@ -124,12 +104,20 @@ int		ft_check_rightwall(t_fillstr *vl, t_coor vlc);
 int		ft_check_bottom(t_fillstr *vl, t_coor vlc);
 
 /*
-**	go walls
+**	remaining
 */
 
-int		calc_and_go_wall(t_fillstr *vl, t_coor vlc, int i, int d);
-
+int			calc_and_go_wall(t_fillstr *vl, t_coor vlc, int i, int d);
 int			ft_return_coor(t_fillstr *vl, int i, int d);
-void		ft_init_walls(t_fillstr *vl, int *ti, int *td);
+void		ft_init_offset(t_fillstr *vl, int *ti, int *td);
+void		ft_el_help(t_fillstr *vl, t_coor *vlc, int on);
+void		ft_fit_piece_help(int *temp, int *i, int *d, int *ti);
+void		ft_fit_piece_init(int *temp, int d, int *count);
+void		ft_fit_piece_incr(int *td, int *d);
+void		ft_fit_piece_compare(char one, char two, int *count);
+int			ft_return(int count);
+void		ft_last_enemy_when_pl(t_fillstr *vl, t_coor *vlc);
+void		ft_last_enemy_when_ph(t_fillstr *vl, t_coor *vlc);
+int			ft_distance(int *enemy, int *tokencoor);
 
 #endif

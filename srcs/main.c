@@ -6,11 +6,18 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/24 16:00:51 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/14 12:59:42 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/14 19:18:51 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/filler.h"
+
+void	ft_write(t_fillstr vl)
+{
+	vl.coorsave[0] -= vl.offsetw;
+	vl.coorsave[1] -= vl.offsetl;
+	ft_printf("%d %d\n", vl.coorsave[1], vl.coorsave[0]);
+}
 
 void	ft_init_vl(t_fillstr *vl)
 {
@@ -41,7 +48,7 @@ void	ft_start_cond(void)
 		if (ret)
 		{
 			if (!i)
-				ft_findcoor(&vlc, vl);
+				ft_findcoor_xo(&vlc, vl);
 			ft_getpiece(&vl);
 			ft_placepiece(&vl, vlc);
 		}

@@ -6,11 +6,34 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/31 16:02:33 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/14 14:02:32 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/14 19:15:36 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/filler.h"
+
+void		ft_latest_e(t_fillstr *vl, t_coor *vlc)
+{
+	if (vlc->playc[1] > vlc->compc[1])
+	{
+		if (ft_check_ceiling(vl, *vlc))
+		{
+			if (ft_check_bottom(vl, *vlc))
+				ft_el_help(vl, vlc, 1);
+			else
+				ft_el_help(vl, vlc, 2);
+		}
+		else
+			ft_el_help(vl, vlc, 3);
+	}
+	else
+	{
+		if (!ft_check_ceiling(vl, *vlc))
+			ft_last_enemy_when_ph(vl, vlc);
+		else
+			ft_last_enemy_when_pl(vl, vlc);
+	}
+}
 
 void		ft_findcoor_xo(t_coor *vlc, t_fillstr vl)
 {
@@ -19,9 +42,9 @@ void		ft_findcoor_xo(t_coor *vlc, t_fillstr vl)
 
 	i = 0;
 	d = 0;
-	while (i < vl.fieldl)
+	while (i < vl.fldl)
 	{
-		while (d < vl.fieldw)
+		while (d < vl.fldw)
 		{
 			if (vl.field[i][d] == vlc->player)
 			{
@@ -38,9 +61,4 @@ void		ft_findcoor_xo(t_coor *vlc, t_fillstr vl)
 		d = 0;
 		i++;
 	}
-}
-
-void		ft_findcoor(t_coor *vlc, t_fillstr vl)
-{
-	ft_findcoor_xo(vlc, vl);
 }

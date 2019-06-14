@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/06/03 18:54:40 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/13 15:57:05 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/14 11:40:51 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,31 +122,36 @@ void		ft_latest_e(t_fillstr *vl, t_coor *vlc)
 	}
 	else
 	{
-	//	ft_printf("de eerste juiste else\n");
-		if (ft_check_bottom(vl, *vlc)) // als we naar boven moeten
-		{
-		//	ft_printf("de tweede juiste else\n");
-			if (ft_check_ceiling(vl, *vlc)) // als we ook boven zijn geweest en naar midden willen
-			{
-				vlc->el[0] = vl->fieldw - (vl->fieldw / 3);
-				vlc->el[1] = (vl->fieldl / 2);
-			}
-			else
-			{
-			//	ft_printf("de derde juiste else\n");
-				vlc->el[0] = (vl->fieldw / 2);
-				vlc->el[1] = 0;
-			}
-		}
+		if (ft_check_bottom(vl, *vlc)) // als we onder zijn is het true.
+			ft_last_enemy_when_ph(vl, vlc);
 		else
-		{
-			//ft_last_enemy_when_ph(vl, vlc);
-		//	ft_printf("de tweede juiste else\n");
-			vlc->el[0] = (vl->fieldw / 2 - (vl->fieldw / 5));
-			vlc->el[1] = vl->fieldl;
-		//	ft_printf("the el[0]: %d\n the el[1]: %d\n", vlc->el[0], vlc->el[1]);
-		}
+			ft_last_enemy_when_pl(vl, vlc);
 	}
+	// //	ft_printf("de eerste juiste else\n");
+	// 	if (ft_check_bottom(vl, *vlc)) // als we naar boven moeten
+	// 	{
+	// 	//	ft_printf("de tweede juiste else\n");
+	// 		if (ft_check_ceiling(vl, *vlc)) // als we ook boven zijn geweest en naar midden willen
+	// 		{
+	// 			vlc->el[0] = vl->fieldw - (vl->fieldw / 3);
+	// 			vlc->el[1] = (vl->fieldl / 2);
+	// 		}
+	// 		else
+	// 		{
+	// 		//	ft_printf("de derde juiste else\n");
+	// 			vlc->el[0] = (vl->fieldw / 2);
+	// 			vlc->el[1] = 0;
+	// 		}
+	// 	}
+	// 	else
+	// 	{
+	// 		//ft_last_enemy_when_ph(vl, vlc);
+	// 	//	ft_printf("de tweede juiste else\n");
+	// 		vlc->el[0] = (vl->fieldw / 2 - (vl->fieldw / 5));
+	// 		vlc->el[1] = vl->fieldl;
+	// 	//	ft_printf("the el[0]: %d\n the el[1]: %d\n", vlc->el[0], vlc->el[1]);
+	// 	}
+	// }
 // 	{
 // 		//here i could just switch up the above code then it will win ///////////////////////
 // 		if (ft_check_bottom(vl, *vlc)) // als we onder zijn is het true.

@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/06/03 18:54:40 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/14 19:02:44 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/14 19:28:05 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void		ft_findplace(t_fillstr *vl, t_coor vlc)
 				if (calc_and_go_wall(vl, vlc, i, d))
 					wall = 1;
 				else if (!wall)
-					calc_and_save_coor_enemy(vl, vlc, i, d);
+					calc_save_co_en(vl, vlc, i, d);
 			}
 			d++;
 		}

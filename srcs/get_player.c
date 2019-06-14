@@ -6,19 +6,19 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/29 14:21:58 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/13 15:42:22 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/14 13:54:47 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/filler.h"
 
-int globalfd = 0;
+int	globalfd;
 
 void	ft_getplayer(t_coor *vl)
 {
 	char		*playerstring;
 
-//	globalfd = open("input.txt", O_RDONLY);
+	globalfd = open("input.txt", O_RDONLY);
 	get_next_line(globalfd, &playerstring);
 	if (playerstring[10] == '1')
 	{

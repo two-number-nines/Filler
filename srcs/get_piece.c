@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/06/07 19:06:09 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/08 16:15:06 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/14 13:55:49 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void	ft_split(t_fillstr *vl)
 	vl->token = ft_strnsplit(vl->otoken, vl->tokenw);
 	while (i < vl->tokenl)
 	{
-	//	ft_printf("%s\n", vl->token[i]);
 		i++;
 	}
 	free(vl->otoken);
@@ -32,7 +31,7 @@ static void		ft_get_str(t_fillstr *vl)
 {
 	char	*tempvalue;
 	int		i;
-	
+
 	vl->otoken = (char *)malloc(sizeof(char) * (vl->tokenw * vl->tokenl) + 1);
 	ft_bzero(vl->otoken, (vl->tokenw * vl->tokenl) + 1);
 	i = vl->tokenl;
@@ -43,8 +42,6 @@ static void		ft_get_str(t_fillstr *vl)
 		free(tempvalue);
 		i--;
 	}
-//	ft_printf("tokenstr: %s\n", vl->otoken);
-//	ft_printf("strlen: %d\n", ft_strlen(vl->otoken));
 }
 
 static void		ft_get_len_wid(t_fillstr *vl)
@@ -66,7 +63,6 @@ static void		ft_get_len_wid(t_fillstr *vl)
 		i++;
 	}
 	free(tempvalue);
-//	ft_printf("tl: %d\ntw: %d\n", vl->tokenl, vl->tokenw);
 }
 
 void			ft_getpiece(t_fillstr *vl)

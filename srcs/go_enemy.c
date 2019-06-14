@@ -6,28 +6,38 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/06/06 12:19:58 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/13 15:21:11 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/14 13:51:59 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/filler.h"
 
-/*
-** play around with the -vlc el (enemy last placed) and see the impact.
-** it destroys every player on big maps but map 00 is hard, try to block the walls
-*/
+static void	init_calc_and_save(int *ti, int *td, int *lastxy, int *temp)
+{
+	(*ti) = 0;
+	(*td) = 0;
+	(*temp) = 0;
+	(*lastxy) = 0;
+	(*++lastxy) = 0;
+}
 
-void	calc_and_save_coor_enemy(t_fillstr *vl, t_coor vlc, int i, int d)
+static void	save_the_coor(t_fillstr *vl, int i, int d, int temp)
+{
+	if (temp < vl->distance && temp)
+	{
+		vl->distance = temp;
+		ft_return_coor(vl, i, d);
+	}
+}
+
+void		calc_and_save_coor_enemy(t_fillstr *vl, t_coor vlc, int i, int d)
 {
 	int ti;
 	int td;
 	int lastxy[2];
 	int temp;
 
-	ti = 0;
-	td = 0;
-	lastxy[0] = 0;
-	lastxy[1] = 0;
+	init_calc_and_save(&ti, &td, lastxy, &temp);
 	while (ti < vl->tokenl)
 	{
 		while (td < vl->tokenw)
@@ -38,16 +48,7 @@ void	calc_and_save_coor_enemy(t_fillstr *vl, t_coor vlc, int i, int d)
 				lastxy[1] = i + ti - vl->offsetl;
 				temp = ft_distance(vlc.el, lastxy);
 			}
-//			ft_printf("the temp(so distance to enemy): %d\n", temp);
-			//if (temp == 0)
-//			ft_printf("the x and y, %d %d\n", d, i);
-			if (temp < vl->distance && temp)
-			{
-				vl->distance = temp;
-				vl->coorsave[0] = d;
-				vl->coorsave[1] = i;
-			}
-			
+			save_the_coor(vl, i, d, temp);
 			td++;
 		}
 		td = 0;

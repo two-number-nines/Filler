@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/24 16:22:45 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/11 16:43:27 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/14 13:22:02 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,8 @@ int		ft_check_bottom(t_fillstr *vl, t_coor vlc);
 */
 
 int		calc_and_go_wall(t_fillstr *vl, t_coor vlc, int i, int d);
+
+int			ft_return_coor(t_fillstr *vl, int i, int d);
+void		ft_init_walls(t_fillstr *vl, int *ti, int *td);
 
 #endif

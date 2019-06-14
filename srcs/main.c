@@ -6,7 +6,7 @@
 /*   By: vmulder <vmulder@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/24 16:00:51 by vmulder        #+#    #+#                */
-/*   Updated: 2019/06/11 14:32:03 by vmulder       ########   odam.nl         */
+/*   Updated: 2019/06/14 12:59:42 by vmulder       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_init(t_coor *vlc)
 
 void	ft_start_cond(void)
 {
-	t_fillstr 	vl;
+	t_fillstr	vl;
 	t_coor		vlc;
 	int			i;
 	int			ret;
@@ -36,7 +36,6 @@ void	ft_start_cond(void)
 	ret = 1;
 	while (ret)
 	{
-
 		ft_init_vl(&vl);
 		ret = ft_getfield(&vl);
 		if (ret)
@@ -46,7 +45,7 @@ void	ft_start_cond(void)
 			ft_getpiece(&vl);
 			ft_placepiece(&vl, vlc);
 		}
-		 i = 1;
+		i = 1;
 	}
 }
 

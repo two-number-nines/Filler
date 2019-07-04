@@ -4,7 +4,7 @@ Game where enemies compete who can place more random pieces on the board. The bo
 ## Getting Started
 Run **make** in root folder and player executable will be created. **players** folder in **resources** folder consists of executables ready for the battle. **resources** folder also stores maps for the game. **resources/maps** folder consists of small map (map00), medium size map (map01) and big map (map02). After copying the executable to **resources/players folder**, the game can be launched by running in terminal
 ```
-./filler_vm -p1 players/lskrauci.filler -p2 players/carli.filler -v -f maps/map00
+./filler_vm -p1 players/vmulder.filler -p2 players/carli.filler -v -f maps/map00
 ```
 The filler_vm hands out random pieces to both players (executables) who need to place as many as they can
 while blocking the enemy from doing the same. **-p1** denotes player 1 executable and **-p2** denotes player 2 executable.
